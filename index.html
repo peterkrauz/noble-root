@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Invitation</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/envelope.css">
+  <link rel="stylesheet" href="css/cards.css">
+  
+  <!-- Favicon (placeholder) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
+</head>
+<body>
+  <!-- ============================================
+       SCROLL CONTAINER
+       Extra height for scroll-driven animations
+       ============================================ -->
+  <div class="scroll-container">
+    
+    <!-- ============================================
+         STICKY WRAPPER
+         Keeps envelope centered during scroll
+         ============================================ -->
+    <div class="sticky-wrapper">
+      
+      <!-- ============================================
+           INTRO TEXT
+           "Introducing the [Names]"
+           ============================================ -->
+      <div class="intro-text" id="introText">
+        <p class="introducing">Introducing</p>
+        <!-- ========== EDIT COUPLE'S LAST NAME HERE ========== -->
+        <p class="names">the Smiths</p>
+      </div>
+      
+      <!-- ============================================
+           ENVELOPE SCENE
+           3D perspective container
+           ============================================ -->
+      <div class="envelope-scene">
+        
+        <!-- Floral Decorations -->
+        <div class="floral-decoration floral-left" id="floralLeft">
+          <div class="floral-placeholder">Floral<br>Image</div>
+        </div>
+        <div class="floral-decoration floral-right" id="floralRight">
+          <div class="floral-placeholder">Floral<br>Image</div>
+        </div>
+        
+        <!-- Envelope -->
+        <div class="envelope">
+          
+          <!-- Envelope Body -->
+          <div class="envelope-body">
+            <!-- Scenic Liner (visible when open) -->
+            <div class="envelope-liner" id="envelopeLiner">
+              <div class="scenic-placeholder">
+                Scenic Image<br>(Swans, Lake, etc.)
+              </div>
+            </div>
+          </div>
+          
+          <!-- Envelope Flap (rotates open) -->
+          <div class="envelope-flap" id="envelopeFlap">
+            <div class="envelope-flap-front"></div>
+            <div class="envelope-flap-back"></div>
+          </div>
+          
+          <!-- Wax Seal -->
+          <div class="wax-seal" id="waxSeal">
+            <div class="wax-seal-circle">
+              <!-- ========== EDIT INITIALS HERE ========== -->
+              <span class="wax-seal-initials">A&B</span>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- ============================================
+             CARDS CONTAINER
+             Wedding info cards that emerge on scroll
+             ============================================ -->
+        <div class="cards-container" id="cardsContainer">
+          
+          <!-- Names Card (Olive Green) -->
+          <div class="card card-names" id="cardNames">
+            <p class="card-label">Please join us for the wedding of</p>
+            <div class="couple-names">
+              <!-- ========== EDIT NAMES HERE ========== -->
+              <span>Alice</span>
+              <span class="ampersand">&</span>
+              <span>Benjamin</span>
+            </div>
+          </div>
+          
+          <!-- Date Card -->
+          <div class="card card-date" id="cardDate">
+            <!-- ========== EDIT DATE/TIME/VENUE HERE ========== -->
+            <p class="date-day">15</p>
+            <p class="date-month">September</p>
+            <p class="date-year">2026</p>
+            <p class="venue-time">
+              At 4:00 PM<br>
+              Rosewood Gardens<br>
+              Napa Valley, CA
+            </p>
+          </div>
+          
+          <!-- Details Button -->
+          <a href="#details" class="card card-details-btn" id="cardDetails">
+            <span class="btn-label">Click for the</span>
+            <span class="btn-text">Details</span>
+          </a>
+          
+          <!-- RSVP Card -->
+          <!-- ========== EDIT GOOGLE FORM LINK HERE ========== -->
+          <a href="https://forms.google.com/your-form-link" target="_blank" rel="noopener" class="card card-rsvp" id="cardRsvp">
+            <div class="rsvp-seal">
+              <!-- ========== EDIT INITIALS HERE ========== -->
+              <span>A&B</span>
+            </div>
+            <p class="rsvp-label">Kindly</p>
+            <p class="rsvp-text">RSVP</p>
+            <p class="rsvp-here">Here</p>
+          </a>
+          
+          <!-- Photo Cards -->
+          <div class="card card-photo card-photo-1" id="cardPhoto1">
+            <div class="photo-placeholder">Photo 1</div>
+          </div>
+          <div class="card card-photo card-photo-2" id="cardPhoto2">
+            <div class="photo-placeholder">Photo 2</div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <!-- Scroll Hint -->
+      <div class="scroll-hint" id="scrollHint">
+        <p>Scroll to open...</p>
+        <span class="arrow">↓</span>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  <!-- ============================================
+       FOOTER
+       Shown after all cards emerge
+       ============================================ -->
+  <footer class="site-footer" id="siteFooter">
+    <div class="footer-content">
+      <!-- ========== EDIT NAMES & DATE HERE ========== -->
+      <h2 class="footer-names">Alice & Benjamin</h2>
+      <h3 class="footer-date">September 15, 2026</h3>
+    </div>
+  </footer>
+  
+  <!-- ============================================
+       DETAILS SECTION (Optional Modal/Section)
+       ============================================ -->
+  <section class="details-section" id="details">
+    <div class="details-content">
+      <h2>Wedding Details</h2>
+      <div class="details-grid">
+        <div class="detail-item">
+          <h3>Ceremony</h3>
+          <p>4:00 PM</p>
+          <p>Garden Pavilion</p>
+        </div>
+        <div class="detail-item">
+          <h3>Reception</h3>
+          <p>5:30 PM</p>
+          <p>Grand Ballroom</p>
+        </div>
+        <div class="detail-item">
+          <h3>Dress Code</h3>
+          <p>Formal Attire</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Scroll Animation Script -->
+  <script src="js/scroll-animation.js"></script>
+</body>
+</html>
+

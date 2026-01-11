@@ -1,0 +1,61 @@
+/* ============================================
+   WEDDING WEBSITE - COLOR & FONT VARIABLES
+   ============================================
+   Edit these values to customize the color scheme!
+   ============================================ */
+
+:root {
+  /* ---- PRIMARY COLORS ---- */
+  --color-olive: #6b7c4c;           /* Envelope, accent cards */
+  --color-olive-dark: #4a5635;      /* Darker olive for hover states */
+  --color-olive-light: #8a9b6b;     /* Lighter olive for subtle accents */
+  
+  --color-burgundy: #722f37;        /* Wax seal, buttons, accents */
+  --color-burgundy-dark: #5a252c;   /* Darker burgundy for hover */
+  --color-burgundy-light: #8b3d47;  /* Lighter burgundy */
+  
+  /* ---- NEUTRAL COLORS ---- */
+  --color-cream: #f9f6f0;           /* Main background */
+  --color-cream-dark: #f0ebe3;      /* Card backgrounds */
+  --color-white: #ffffff;           /* Pure white for cards */
+  
+  /* ---- ACCENT COLORS ---- */
+  --color-gold: #c9a962;            /* Gold accents, borders */
+  --color-gold-light: #d4bc7d;      /* Lighter gold */
+  
+  /* ---- TEXT COLORS ---- */
+  --color-text-dark: #2d2d2d;       /* Primary text */
+  --color-text-light: #f9f6f0;      /* Text on dark backgrounds */
+  --color-text-muted: #6b6b6b;      /* Secondary/muted text */
+  
+  /* ---- SHADOWS ---- */
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.15);
+  --shadow-strong: 0 12px 40px rgba(0, 0, 0, 0.2);
+  
+  /* ---- FONTS ---- */
+  --font-script: 'Cormorant Garamond', serif;    /* Elegant script for names */
+  --font-serif: 'Playfair Display', serif;        /* Body text, details */
+  --font-sans: 'Montserrat', sans-serif;          /* UI elements, small text */
+  
+  /* ---- SPACING ---- */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 6rem;
+  
+  /* ---- TRANSITIONS ---- */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s ease;
+  --transition-slow: 0.8s ease;
+  
+  /* ---- Z-INDEX LAYERS ---- */
+  --z-background: 1;
+  --z-envelope: 10;
+  --z-cards: 20;
+  --z-flap: 30;
+  --z-seal: 40;
+  --z-overlay: 100;
+}
+

@@ -167,8 +167,8 @@
     cursor: pointer;
     z-index: calc(var(--z-cards) + 1);
     /* Final position: right side - in upper-center of viewport */
-    --final-x: 320px;
-    --final-y: -540px;
+    --final-x: 280px;
+    --final-y: -450px;
     --final-rotate: 5deg;
     transition: transform 0.1s linear, opacity 0.1s linear, background-color var(--transition-fast);
 }
@@ -201,8 +201,8 @@
     z-index: var(--z-cards);
     cursor: pointer;
     /* Final position: left side - in upper-center of viewport */
-    --final-x: -280px;
-    --final-y: -520px;
+    --final-x: -270px;
+    --final-y: -450px;
     --final-rotate: -5deg;
     transition: transform 0.1s linear, opacity 0.1s linear, box-shadow var(--transition-fast);
 }

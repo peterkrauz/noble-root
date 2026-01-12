@@ -120,7 +120,8 @@ img {
 /* ---- PAGE STRUCTURE ---- */
 .scroll-container {
   /* Extra height to allow for scroll-driven animations */
-  min-height: 500vh;
+  /* Increased to give more dwell time on RSVP before scrolling to details */
+  min-height: 800vh;
   position: relative;
 }
 
@@ -132,7 +133,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow: visible; /* Allow cards to extend beyond viewport */
 }
 
 /* ---- SCROLL HINT ---- */
@@ -268,11 +269,7 @@ img {
   }
   
   .scroll-container {
-    min-height: 600vh;
-  }
-  
-  .envelope-scene {
-    transform: scale(0.9);
+    min-height: 900vh;
   }
   
   .intro-text {
@@ -299,11 +296,7 @@ img {
 
 @media (max-width: 480px) {
   .scroll-container {
-    min-height: 700vh;
-  }
-  
-  .envelope-scene {
-    transform: scale(0.8);
+    min-height: 1000vh;
   }
   
   .floral-decoration {

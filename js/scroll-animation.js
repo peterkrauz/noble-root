@@ -16,25 +16,30 @@
     // Scroll thresholds (as percentage of scroll height)
     scrollHintFade: 0.05,        // When scroll hint starts fading
     flapStartOpen: 0.08,         // When flap starts opening
-    flapFullyOpen: 0.20,         // When flap is fully open
+    flapFullyOpen: 0.22,         // When flap is fully open
     sealBreak: 0.12,             // When wax seal breaks
     linerReveal: 0.18,           // When envelope liner reveals
-    introFade: 0.15,             // When intro text fades
-    floralReveal: 0.25,          // When floral decorations appear
+    introFade: 0.10,             // When intro text fades
+    floralReveal: 0.30,          // When floral decorations appear
     
-    // Card emergence thresholds
+    // Envelope movement (moves to bottom as it opens)
+    envelopeMoveStart: 0.08,     // When envelope starts moving down
+    envelopeMoveEnd: 0.25,       // When envelope reaches final position
+    envelopeFinalY: 25,          // Final Y position (vh from center, 25 = 10% higher than before)
+    
+    // Card emergence thresholds - SLOWER, more spaced out
     cards: {
-      names:   { start: 0.22, end: 0.35 },
-      date:    { start: 0.30, end: 0.45 },
-      details: { start: 0.38, end: 0.55 },
-      rsvp:    { start: 0.46, end: 0.63 },
-      photo1:  { start: 0.54, end: 0.70 },
-      photo2:  { start: 0.58, end: 0.75 },
+      names:   { start: 0.25, end: 0.40 },
+      date:    { start: 0.40, end: 0.55 },
+      details: { start: 0.55, end: 0.70 },
+      rsvp:    { start: 0.70, end: 0.85 },
+      photo1:  { start: 0.80, end: 0.92 },
+      photo2:  { start: 0.85, end: 0.95 },
     },
     
     // Animation values
     flapMaxRotation: 180,        // Degrees the flap rotates
-    cardStartY: 150,             // Initial Y offset for cards (inside envelope)
+    cardStartY: 80,              // Initial Y offset for cards (inside envelope, relative to envelope)
     cardStartScale: 0.85,        // Initial scale for cards
   };
 
@@ -44,11 +49,13 @@
   const elements = {
     scrollHint: document.getElementById('scrollHint'),
     introText: document.getElementById('introText'),
+    envelopeScene: document.querySelector('.envelope-scene'),
     envelopeFlap: document.getElementById('envelopeFlap'),
     envelopeLiner: document.getElementById('envelopeLiner'),
     waxSeal: document.getElementById('waxSeal'),
     floralLeft: document.getElementById('floralLeft'),
     floralRight: document.getElementById('floralRight'),
+    cardsContainer: document.getElementById('cardsContainer'),
     cardNames: document.getElementById('cardNames'),
     cardDate: document.getElementById('cardDate'),
     cardDetails: document.getElementById('cardDetails'),
@@ -90,6 +97,13 @@
   function easeOutCubic(t) {
     return 1 - Math.pow(1 - t, 3);
   }
+  
+  /**
+   * Ease in out cubic for envelope movement
+   */
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
 
   /**
    * Get scroll progress (0 to 1)
@@ -124,6 +138,23 @@
     } else {
       elements.introText.classList.remove('hidden');
     }
+  }
+
+  /**
+   * Animate the envelope moving down to the bottom of viewport
+   */
+  function animateEnvelopePosition(progress) {
+    const moveProgress = clamp(
+      (progress - CONFIG.envelopeMoveStart) / (CONFIG.envelopeMoveEnd - CONFIG.envelopeMoveStart),
+      0,
+      1
+    );
+    const easedProgress = easeInOutCubic(moveProgress);
+    
+    // Move from center (0) to bottom third of viewport
+    const translateY = lerp(0, CONFIG.envelopeFinalY, easedProgress);
+    
+    elements.envelopeScene.style.transform = `translateY(${translateY}vh)`;
   }
 
   /**
@@ -178,6 +209,7 @@
 
   /**
    * Animate a single card emerging from envelope
+   * Cards spill upward from the envelope which is now at the bottom
    */
   function animateCard(card, progress, cardConfig) {
     if (!card) return;
@@ -194,7 +226,7 @@
     const finalY = parseFloat(style.getPropertyValue('--final-y')) || 0;
     const finalRotate = parseFloat(style.getPropertyValue('--final-rotate')) || 0;
     
-    // Calculate current values
+    // Calculate current values - cards start inside envelope and move UP (negative Y)
     const currentY = lerp(CONFIG.cardStartY, finalY, easedProgress);
     const currentX = lerp(0, finalX, easedProgress);
     const currentScale = lerp(CONFIG.cardStartScale, 1, easedProgress);
@@ -242,6 +274,7 @@
     // Run all animations
     animateScrollHint(progress);
     animateIntroText(progress);
+    animateEnvelopePosition(progress);
     animateEnvelopeFlap(progress);
     animateWaxSeal(progress);
     animateEnvelopeLiner(progress);
@@ -283,4 +316,3 @@
   }
 
 })();
-

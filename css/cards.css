@@ -39,7 +39,7 @@
     z-index: calc(var(--z-cards) + 3);
     /* Final position: upper left - cards spill UPWARD to upper-center of viewport */
     --final-x: -180px;
-    --final-y: -680px;
+    --final-y: -800px;
     --final-rotate: -3deg;
 }
 
@@ -92,7 +92,7 @@
     z-index: calc(var(--z-cards) + 2);
     /* Final position: upper right - in upper-center of viewport */
     --final-x: 200px;
-    --final-y: -640px;
+    --final-y: -760px;
     --final-rotate: 2deg;
 }
 
@@ -168,7 +168,7 @@
     z-index: calc(var(--z-cards) + 1);
     /* Final position: right side - in upper-center of viewport */
     --final-x: 280px;
-    --final-y: -450px;
+    --final-y: -570px;
     --final-rotate: 5deg;
     transition: transform 0.1s linear, opacity 0.1s linear, background-color var(--transition-fast);
 }
@@ -202,7 +202,7 @@
     cursor: pointer;
     /* Final position: left side - in upper-center of viewport */
     --final-x: -270px;
-    --final-y: -450px;
+    --final-y: -570px;
     --final-rotate: -5deg;
     transition: transform 0.1s linear, opacity 0.1s linear, box-shadow var(--transition-fast);
 }
@@ -264,7 +264,7 @@
     z-index: calc(var(--z-cards) - 1);
     /* Final position: center-left area */
     --final-x: -60px;
-    --final-y: -600px;
+    --final-y: -720px;
     --final-rotate: 8deg;
 }
 
@@ -272,7 +272,7 @@
     z-index: calc(var(--z-cards) - 2);
     /* Final position: upper right area */
     --final-x: 380px;
-    --final-y: -720px;
+    --final-y: -840px;
     --final-rotate: -6deg;
 }
 
@@ -301,31 +301,31 @@
 @media (max-width: 768px) {
     .card-names {
         --final-x: 0px;
-        --final-y: -700px;
+        --final-y: -820px;
         --final-rotate: 0deg;
     }
 
     .card-date {
         --final-x: 0px;
-        --final-y: -520px;
+        --final-y: -640px;
         --final-rotate: 0deg;
     }
 
     .card-details-btn {
         --final-x: 100px;
-        --final-y: -420px;
+        --final-y: -540px;
         --final-rotate: 0deg;
     }
 
     .card-rsvp {
         --final-x: -100px;
-        --final-y: -420px;
+        --final-y: -540px;
         --final-rotate: 0deg;
     }
 
     .card-photo-1 {
         --final-x: 0px;
-        --final-y: -800px;
+        --final-y: -920px;
         --final-rotate: 5deg;
     }
 

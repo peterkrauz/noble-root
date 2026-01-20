@@ -1,5 +1,6 @@
 /* ============================================
    CARDS STYLES - Wedding Info Cards
+   Carol & Peter's Wedding
    ============================================ */
 
 /* ---- CARDS CONTAINER ---- */
@@ -28,16 +29,16 @@
     transition: transform 0.1s linear, opacity 0.1s linear;
 }
 
-/* ---- NAMES CARD (Olive Green) ---- */
+/* ---- NAMES CARD (Gold gradient) ---- */
 .card-names {
     width: min(280px, 70vw);
     min-height: 200px;
     background: linear-gradient(135deg,
-            var(--color-olive) 0%,
-            var(--color-olive-dark) 100%);
-    color: var(--color-text-light);
+            var(--color-gold) 0%,
+            var(--color-gold-dark) 100%);
+    color: var(--color-burgundy-dark);
     z-index: calc(var(--z-cards) + 3);
-    /* Final position: upper left - cards spill UPWARD to upper-center of viewport */
+    /* Final position: upper left */
     --final-x: -180px;
     --final-y: -800px;
     --final-rotate: -3deg;
@@ -45,8 +46,9 @@
 
 .card-names .card-label {
     font-family: var(--font-sans);
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     opacity: 0.9;
     margin-bottom: var(--spacing-sm);
@@ -54,15 +56,15 @@
 
 .card-names .couple-names {
     font-family: var(--font-script);
-    font-size: clamp(2rem, 5vw, 2.5rem);
-    font-style: italic;
-    line-height: 1.3;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    line-height: 1.1;
 }
 
 .card-names .ampersand {
     display: block;
-    font-size: 1.5rem;
-    margin: 0.25rem 0;
+    font-size: 2rem;
+    margin: 0.15rem 0;
+    font-family: var(--font-script);
 }
 
 /* Decorative dots on names card */
@@ -83,59 +85,60 @@
         -12px 12px 0 var(--color-cream);
 }
 
-/* ---- DATE CARD (Cream with Gold) ---- */
+/* ---- DATE CARD (Cream with Burgundy border) ---- */
 .card-date {
     width: min(220px, 55vw);
     min-height: 180px;
-    background: var(--color-white);
-    border: 2px solid var(--color-gold);
+    background: var(--color-cream);
+    border: 3px solid var(--color-burgundy);
     z-index: calc(var(--z-cards) + 2);
-    /* Final position: upper right - in upper-center of viewport */
+    /* Final position: upper right */
     --final-x: 200px;
     --final-y: -760px;
     --final-rotate: 2deg;
 }
 
 .card-date .date-day {
-    font-family: var(--font-serif);
-    font-size: 3rem;
-    font-weight: 400;
-    color: var(--color-text-dark);
+    font-family: var(--font-sans);
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--color-burgundy);
     line-height: 1;
 }
 
 .card-date .date-month {
     font-family: var(--font-script);
-    font-size: 2rem;
-    font-style: italic;
-    color: var(--color-text-dark);
+    font-size: 2.5rem;
+    color: var(--color-burgundy);
     margin: 0.25rem 0;
 }
 
 .card-date .date-year {
-    font-family: var(--font-serif);
-    font-size: 1.5rem;
-    color: var(--color-text-dark);
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--color-burgundy);
     margin-bottom: var(--spacing-sm);
 }
 
 .card-date .venue-time {
     font-family: var(--font-sans);
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
+    font-size: 0.55rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-text-muted);
+    color: var(--color-gold-dark);
     line-height: 1.8;
 }
 
-/* Gold corner accents */
+/* Burgundy corner accents */
 .card-date::before,
 .card-date::after {
     content: '';
     position: absolute;
     width: 20px;
     height: 20px;
-    border: 2px solid var(--color-gold);
+    border: 2px solid var(--color-burgundy);
 }
 
 .card-date::before {
@@ -157,7 +160,7 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background: var(--color-burgundy);
+    background: linear-gradient(135deg, var(--color-coral) 0%, var(--color-coral-dark) 100%);
     color: var(--color-text-light);
     display: flex;
     flex-direction: column;
@@ -166,7 +169,7 @@
     padding: var(--spacing-sm);
     cursor: pointer;
     z-index: calc(var(--z-cards) + 1);
-    /* Final position: right side - in upper-center of viewport */
+    /* Final position: right side */
     --final-x: 280px;
     --final-y: -570px;
     --final-rotate: 5deg;
@@ -174,21 +177,21 @@
 }
 
 .card-details-btn:hover {
-    background: var(--color-burgundy-dark);
+    background: linear-gradient(135deg, var(--color-coral-dark) 0%, var(--color-burgundy) 100%);
 }
 
 .card-details-btn .btn-label {
     font-family: var(--font-sans);
-    font-size: 0.5rem;
-    letter-spacing: 0.15em;
+    font-size: 0.45rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     margin-bottom: 0.25rem;
 }
 
 .card-details-btn .btn-text {
     font-family: var(--font-script);
-    font-size: 1.25rem;
-    font-style: italic;
+    font-size: 1.5rem;
 }
 
 /* ---- RSVP CARD ---- */
@@ -198,9 +201,10 @@
     background: linear-gradient(135deg,
             var(--color-cream) 0%,
             var(--color-cream-dark) 100%);
+    border: 2px solid var(--color-gold);
     z-index: var(--z-cards);
     cursor: pointer;
-    /* Final position: left side - in upper-center of viewport */
+    /* Final position: left side */
     --final-x: -270px;
     --final-y: -570px;
     --final-rotate: -5deg;
@@ -216,7 +220,7 @@
     height: 40px;
     margin: 0 auto var(--spacing-sm);
     background: radial-gradient(circle at 30% 30%,
-            var(--color-burgundy-light) 0%,
+            var(--color-coral) 0%,
             var(--color-burgundy) 50%,
             var(--color-burgundy-dark) 100%);
     border-radius: 50%;
@@ -224,40 +228,38 @@
     align-items: center;
     justify-content: center;
     font-family: var(--font-script);
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: var(--color-gold);
-    font-style: italic;
 }
 
 .card-rsvp .rsvp-label {
     font-family: var(--font-script);
-    font-size: 0.9rem;
-    font-style: italic;
-    color: var(--color-text-muted);
+    font-size: 1rem;
+    color: var(--color-gold-dark);
 }
 
 .card-rsvp .rsvp-text {
     font-family: var(--font-script);
-    font-size: 1.75rem;
-    font-style: italic;
-    color: var(--color-text-dark);
+    font-size: 2rem;
+    color: var(--color-burgundy);
     margin: 0.25rem 0;
 }
 
 .card-rsvp .rsvp-here {
     font-family: var(--font-script);
-    font-size: 1rem;
-    font-style: italic;
-    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    color: var(--color-gold-dark);
 }
 
-/* ---- PHOTO CARDS ---- */
+/* ---- ILLUSTRATION CARDS (replacing photo placeholders) ---- */
 .card-photo {
-    width: min(140px, 35vw);
-    height: min(160px, 40vw);
-    padding: 8px 8px 30px 8px;
-    background: var(--color-white);
+    width: min(160px, 40vw);
+    height: min(180px, 45vw);
+    padding: 0;
+    background: var(--color-burgundy-dark);
     box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    border-radius: 8px;
 }
 
 .card-photo-1 {
@@ -276,20 +278,11 @@
     --final-rotate: -6deg;
 }
 
-.card-photo .photo-placeholder {
+.card-illustration {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg,
-            #ddd 0%,
-            #bbb 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-sans);
-    font-size: 0.5rem;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    object-fit: contain;
+    object-position: center;
 }
 
 /* ---- VISIBLE STATE ---- */

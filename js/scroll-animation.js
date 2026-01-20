@@ -5,7 +5,7 @@
    based on scroll position
    ============================================ */
 
-(function() {
+(function () {
   'use strict';
 
   // ============================================
@@ -21,22 +21,22 @@
     linerReveal: 0.18,           // When envelope liner reveals
     introFade: 0.10,             // When intro text fades
     floralReveal: 0.30,          // When floral decorations appear
-    
+
     // Envelope movement (moves to bottom as it opens)
     envelopeMoveStart: 0.08,     // When envelope starts moving down
     envelopeMoveEnd: 0.25,       // When envelope reaches final position
     envelopeFinalY: 25,          // Final Y position (vh from center, 25 = 10% higher than before)
-    
+
     // Card emergence thresholds - SLOWER, more spaced out
     cards: {
-      names:   { start: 0.25, end: 0.40 },
-      date:    { start: 0.40, end: 0.55 },
+      names: { start: 0.25, end: 0.40 },
+      date: { start: 0.40, end: 0.55 },
       details: { start: 0.55, end: 0.70 },
-      rsvp:    { start: 0.70, end: 0.85 },
-      photo1:  { start: 0.80, end: 0.92 },
-      photo2:  { start: 0.85, end: 0.95 },
+      rsvp: { start: 0.70, end: 0.85 },
+      photo1: { start: 0.80, end: 0.92 },
+      photo2: { start: 0.85, end: 0.95 },
     },
-    
+
     // Animation values
     flapMaxRotation: 180,        // Degrees the flap rotates
     cardStartY: 80,              // Initial Y offset for cards (inside envelope, relative to envelope)
@@ -68,7 +68,7 @@
   // ============================================
   // UTILITY FUNCTIONS
   // ============================================
-  
+
   /**
    * Clamp a value between min and max
    */
@@ -97,7 +97,7 @@
   function easeOutCubic(t) {
     return 1 - Math.pow(1 - t, 3);
   }
-  
+
   /**
    * Ease in out cubic for envelope movement
    */
@@ -150,10 +150,10 @@
       1
     );
     const easedProgress = easeInOutCubic(moveProgress);
-    
+
     // Move from center (0) to bottom third of viewport
     const translateY = lerp(0, CONFIG.envelopeFinalY, easedProgress);
-    
+
     elements.envelopeScene.style.transform = `translateY(${translateY}vh)`;
   }
 
@@ -168,7 +168,7 @@
       0,
       CONFIG.flapMaxRotation
     );
-    
+
     elements.envelopeFlap.style.transform = `rotateX(${rotation}deg)`;
   }
 
@@ -213,26 +213,26 @@
    */
   function animateCard(card, progress, cardConfig) {
     if (!card) return;
-    
+
     const { start, end } = cardConfig;
-    
+
     // Calculate card animation progress
     const cardProgress = clamp((progress - start) / (end - start), 0, 1);
     const easedProgress = easeOutCubic(cardProgress);
-    
+
     // Get final position from CSS custom properties
     const style = getComputedStyle(card);
     const finalX = parseFloat(style.getPropertyValue('--final-x')) || 0;
     const finalY = parseFloat(style.getPropertyValue('--final-y')) || 0;
     const finalRotate = parseFloat(style.getPropertyValue('--final-rotate')) || 0;
-    
+
     // Calculate current values - cards start inside envelope and move UP (negative Y)
     const currentY = lerp(CONFIG.cardStartY, finalY, easedProgress);
     const currentX = lerp(0, finalX, easedProgress);
     const currentScale = lerp(CONFIG.cardStartScale, 1, easedProgress);
     const currentRotate = lerp(0, finalRotate, easedProgress);
     const currentOpacity = easedProgress;
-    
+
     // Apply transforms
     card.style.transform = `
       translateX(${currentX}px)
@@ -241,7 +241,7 @@
       rotate(${currentRotate}deg)
     `;
     card.style.opacity = currentOpacity;
-    
+
     // Add visible class when card is mostly visible
     if (cardProgress > 0.5) {
       card.classList.add('visible');
@@ -265,12 +265,12 @@
   // ============================================
   // MAIN ANIMATION LOOP
   // ============================================
-  
+
   let ticking = false;
-  
+
   function updateAnimations() {
     const progress = getScrollProgress();
-    
+
     // Run all animations
     animateScrollHint(progress);
     animateIntroText(progress);
@@ -280,7 +280,7 @@
     animateEnvelopeLiner(progress);
     animateFloralDecorations(progress);
     animateCards(progress);
-    
+
     ticking = false;
   }
 
@@ -294,17 +294,17 @@
   // ============================================
   // INITIALIZATION
   // ============================================
-  
+
   function init() {
     // Set initial states
     updateAnimations();
-    
+
     // Listen for scroll events
     window.addEventListener('scroll', onScroll, { passive: true });
-    
+
     // Handle resize
     window.addEventListener('resize', updateAnimations, { passive: true });
-    
+
     console.log('Wedding scroll animation initialized');
   }
 

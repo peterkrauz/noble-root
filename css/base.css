@@ -1,5 +1,6 @@
 /* ============================================
    BASE STYLES - Reset, Typography, Layout
+   Carol & Peter's Wedding
    ============================================ */
 
 /* ---- CSS RESET ---- */
@@ -162,9 +163,8 @@ img {
 
 .scroll-hint p {
     font-family: var(--font-script);
-    font-size: 1.25rem;
-    font-style: italic;
-    color: var(--color-text-muted);
+    font-size: 1.5rem;
+    color: var(--color-burgundy);
     margin-bottom: 0.5rem;
 }
 
@@ -200,10 +200,9 @@ img {
 
 /* ---- FOOTER ---- */
 .site-footer {
-    background: var(--color-cream-dark);
+    background: var(--color-burgundy-dark);
     padding: var(--spacing-xl) var(--spacing-md);
     text-align: center;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .footer-content {
@@ -213,24 +212,23 @@ img {
 
 .footer-names {
     font-family: var(--font-script);
-    font-size: clamp(2.5rem, 6vw, 3.5rem);
-    font-style: italic;
-    color: var(--color-text-dark);
+    font-size: clamp(3rem, 8vw, 4.5rem);
+    color: var(--color-gold);
     margin-bottom: var(--spacing-xs);
 }
 
 .footer-date {
     font-family: var(--font-sans);
-    font-size: 0.875rem;
-    letter-spacing: 0.2em;
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--color-text-muted);
-    font-weight: 400;
+    color: var(--color-cream);
 }
 
 /* ---- DETAILS SECTION ---- */
 .details-section {
-    background: var(--color-white);
+    background: var(--color-cream);
     padding: var(--spacing-xl) var(--spacing-md);
     min-height: 60vh;
     display: flex;
@@ -245,36 +243,53 @@ img {
 
 .details-content h2 {
     font-family: var(--font-script);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-style: italic;
-    color: var(--color-text-dark);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--color-burgundy);
     margin-bottom: var(--spacing-lg);
 }
 
 .details-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .detail-item {
     padding: var(--spacing-md);
+    background: transparent;
+    border-bottom: 1px solid var(--color-gold);
 }
 
 .detail-item h3 {
     font-family: var(--font-sans);
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-burgundy);
+    color: var(--color-coral);
     margin-bottom: var(--spacing-sm);
     font-weight: 500;
 }
 
 .detail-item p {
-    font-family: var(--font-serif);
-    color: var(--color-text-dark);
+    font-family: var(--font-script);
+    font-size: 1.5rem;
+    color: var(--color-burgundy);
     margin-bottom: 0.25rem;
+}
+
+/* Details illustration */
+.details-illustration {
+    margin-top: var(--spacing-lg);
+}
+
+.details-couple-img {
+    max-width: 300px;
+    margin: 0 auto;
+    opacity: 0.9;
 }
 
 /* ---- RESPONSIVE STYLES ---- */

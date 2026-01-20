@@ -1,199 +1,194 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wedding Invitation</title>
-  
+  <title>Carol & Peter - Casamento</title>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@300;400;500;600&family=Reenie+Beanie&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet">
+
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/envelope.css">
   <link rel="stylesheet" href="css/cards.css">
-  
-  <!-- Favicon (placeholder) -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💒</text></svg>">
 </head>
+
 <body>
   <!-- ============================================
        SCROLL CONTAINER
-       Extra height for scroll-driven animations
        ============================================ -->
   <div class="scroll-container">
-    
+
     <!-- ============================================
          STICKY WRAPPER
-         Keeps envelope centered during scroll
          ============================================ -->
     <div class="sticky-wrapper">
-      
+
       <!-- ============================================
            INTRO TEXT
-           "Introducing the [Names]"
            ============================================ -->
       <div class="intro-text" id="introText">
-        <p class="introducing">Introducing</p>
-        <!-- ========== EDIT COUPLE'S LAST NAME HERE ========== -->
-        <p class="names">the Smiths</p>
+        <p class="introducing">Apresentamos</p>
+        <p class="names">Carol & Peter</p>
       </div>
-      
+
       <!-- ============================================
            ENVELOPE SCENE
-           3D perspective container
            ============================================ -->
       <div class="envelope-scene">
-        
-        <!-- Floral Decorations -->
+
+        <!-- Decorações Florais -->
         <div class="floral-decoration floral-left" id="floralLeft">
-          <div class="floral-placeholder">Floral<br>Image</div>
+          <img src="elements/buque-oliva.png" alt="Decoração floral" class="floral-img">
         </div>
         <div class="floral-decoration floral-right" id="floralRight">
-          <div class="floral-placeholder">Floral<br>Image</div>
+          <img src="elements/buque-oliva.png" alt="Decoração floral" class="floral-img floral-img-flip">
         </div>
-        
+
         <!-- Envelope -->
         <div class="envelope">
-          
-          <!-- Envelope Body -->
+
+          <!-- Corpo do Envelope -->
           <div class="envelope-body">
-            <!-- Scenic Liner (visible when open) -->
+            <!-- Forro do Envelope -->
             <div class="envelope-liner" id="envelopeLiner">
-              <div class="scenic-placeholder">
-                Scenic Image<br>(Swans, Lake, etc.)
-              </div>
+              <img src="elements/local-creme-escuro.png" alt="Ilustração do local" class="liner-img">
             </div>
           </div>
-          
-          <!-- Envelope Flap (rotates open) -->
+
+          <!-- Aba do Envelope -->
           <div class="envelope-flap" id="envelopeFlap">
             <div class="envelope-flap-front"></div>
             <div class="envelope-flap-back"></div>
           </div>
-          
-          <!-- Wax Seal -->
+
+          <!-- Selo de Cera -->
           <div class="wax-seal" id="waxSeal">
             <div class="wax-seal-circle">
-              <!-- ========== EDIT INITIALS HERE ========== -->
-              <span class="wax-seal-initials">A&B</span>
+              <span class="wax-seal-initials">C&P</span>
             </div>
           </div>
-          
+
         </div>
-        
+
         <!-- ============================================
-             CARDS CONTAINER
-             Wedding info cards that emerge on scroll
+             CONTAINER DOS CARTÕES
              ============================================ -->
         <div class="cards-container" id="cardsContainer">
-          
-          <!-- Names Card (Olive Green) -->
+
+          <!-- Cartão de Nomes -->
           <div class="card card-names" id="cardNames">
-            <p class="card-label">Please join us for the wedding of</p>
+            <p class="card-label">venha pelo amor fique pelo tiramisú</p>
             <div class="couple-names">
-              <!-- ========== EDIT NAMES HERE ========== -->
-              <span>Alice</span>
+              <span>Carol</span>
               <span class="ampersand">&</span>
-              <span>Benjamin</span>
+              <span>Peter</span>
             </div>
           </div>
-          
-          <!-- Date Card -->
+
+          <!-- Cartão de Data -->
           <div class="card card-date" id="cardDate">
-            <!-- ========== EDIT DATE/TIME/VENUE HERE ========== -->
-            <p class="date-day">15</p>
-            <p class="date-month">September</p>
+            <p class="date-day">30</p>
+            <p class="date-month">Maio</p>
             <p class="date-year">2026</p>
             <p class="venue-time">
-              At 4:00 PM<br>
-              Rosewood Gardens<br>
-              Napa Valley, CA
+              Às 14h<br>
+              Casa Maciço<br>
+              Florianópolis, SC
             </p>
           </div>
-          
-          <!-- Details Button -->
+
+          <!-- Botão de Detalhes -->
           <a href="#details" class="card card-details-btn" id="cardDetails">
-            <span class="btn-label">Click for the</span>
-            <span class="btn-text">Details</span>
+            <span class="btn-label">Clique para</span>
+            <span class="btn-text">Detalhes</span>
           </a>
-          
-          <!-- RSVP Card -->
-          <!-- ========== EDIT GOOGLE FORM LINK HERE ========== -->
-          <a href="https://forms.google.com/your-form-link" target="_blank" rel="noopener" class="card card-rsvp" id="cardRsvp">
+
+          <!-- Cartão de Confirmação -->
+          <a href="https://forms.google.com/your-form-link" target="_blank" rel="noopener" class="card card-rsvp"
+            id="cardRsvp">
             <div class="rsvp-seal">
-              <!-- ========== EDIT INITIALS HERE ========== -->
-              <span>A&B</span>
+              <span>C&P</span>
             </div>
-            <p class="rsvp-label">Kindly</p>
-            <p class="rsvp-text">RSVP</p>
-            <p class="rsvp-here">Here</p>
+            <p class="rsvp-label">Gentilmente</p>
+            <p class="rsvp-text">Confirme</p>
+            <p class="rsvp-here">Aqui</p>
           </a>
-          
-          <!-- Photo Cards -->
+
+          <!-- Cartões de Ilustração -->
           <div class="card card-photo card-photo-1" id="cardPhoto1">
-            <div class="photo-placeholder">Photo 1</div>
+            <img src="elements/casal-dourado.png" alt="Ilustração do casal" class="card-illustration">
           </div>
           <div class="card card-photo card-photo-2" id="cardPhoto2">
-            <div class="photo-placeholder">Photo 2</div>
+            <img src="elements/buque-dourado.png" alt="Ilustração de buquê" class="card-illustration">
           </div>
-          
+
         </div>
-        
+
       </div>
-      
-      <!-- Scroll Hint -->
+
+      <!-- Dica de Rolagem -->
       <div class="scroll-hint" id="scrollHint">
-        <p>Scroll to open...</p>
+        <p>Vai Tomando...</p>
         <span class="arrow">↓</span>
       </div>
-      
+
     </div>
-    
+
   </div>
-  
+
   <!-- ============================================
-       FOOTER
-       Shown after all cards emerge
+       RODAPÉ
        ============================================ -->
   <footer class="site-footer" id="siteFooter">
     <div class="footer-content">
-      <!-- ========== EDIT NAMES & DATE HERE ========== -->
-      <h2 class="footer-names">Alice & Benjamin</h2>
-      <h3 class="footer-date">September 15, 2026</h3>
+      <h2 class="footer-names">Carol & Peter</h2>
+      <h3 class="footer-date">30 de Maio de 2026</h3>
     </div>
   </footer>
-  
+
   <!-- ============================================
-       DETAILS SECTION (Optional Modal/Section)
+       SEÇÃO DE DETALHES
        ============================================ -->
   <section class="details-section" id="details">
     <div class="details-content">
-      <h2>Wedding Details</h2>
+      <h2>Detalhes do Casamento</h2>
       <div class="details-grid">
         <div class="detail-item">
-          <h3>Ceremony</h3>
-          <p>4:00 PM</p>
-          <p>Garden Pavilion</p>
+          <h3>Cerimônia</h3>
+          <p>15h</p>
+          <p>Casa Maciço</p>
         </div>
         <div class="detail-item">
-          <h3>Reception</h3>
-          <p>5:30 PM</p>
-          <p>Grand Ballroom</p>
+          <h3>Recepção</h3>
+          <p>17h30</p>
+          <p>Salão de Festas</p>
         </div>
         <div class="detail-item">
-          <h3>Dress Code</h3>
-          <p>Formal Attire</p>
+          <h3>Traje</h3>
+          <p>Traje Social</p>
         </div>
+      </div>
+
+      <div class="details-illustration">
+        <img src="elements/casal-vinho.png" alt="Casal celebrando" class="details-couple-img">
       </div>
     </div>
   </section>
-  
-  <!-- Scroll Animation Script -->
+
+  <!-- Script de Animação -->
   <script src="js/scroll-animation.js"></script>
 </body>
-</html>
 
+</html>

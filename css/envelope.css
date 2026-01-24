@@ -25,21 +25,26 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg,
-      var(--color-gold) 0%,
-      var(--color-gold-dark) 100%);
+  /* Matte/Fosco - cores sólidas sem brilho */
+  background: #b5a164;
   border-radius: 4px;
   box-shadow: var(--shadow-medium);
   z-index: var(--z-envelope);
   overflow: hidden;
+  transition: box-shadow 0.6s ease;
 }
 
-/* Envelope texture overlay */
+/* Estado aberto - remove TODA sombra para conexão limpa com a aba */
+.envelope-body.opened {
+  box-shadow: none;
+}
+
+/* Envelope texture overlay - textura de papel fosco */
 .envelope-body::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23paper)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none;
 }
 
@@ -88,15 +93,16 @@
   /* Initial state: closed */
   transform: rotateX(0deg);
   transition: transform 0.1s linear;
+  /* Sem sombra na aba */
+  box-shadow: none;
 }
 
 .envelope-flap-front {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg,
-      var(--color-gold-dark) 0%,
-      var(--color-gold) 100%);
+  /* Matte/Fosco - cor sólida */
+  background: #a89352;
   clip-path: polygon(0 0, 50% 100%, 100% 0);
   backface-visibility: hidden;
 }
@@ -105,51 +111,104 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(0deg,
-      var(--color-cream-dark) 0%,
-      var(--color-cream) 100%);
+  /* Interior fosco do envelope - cor sólida sem sombra */
+  background: #d4d0b8;
   clip-path: polygon(0 0, 50% 100%, 100% 0);
   transform: rotateX(180deg);
   backface-visibility: hidden;
+  /* Sem sombra para conexão limpa */
+  box-shadow: none;
 }
 
-/* ---- WAX SEAL ---- */
+/* ---- WAX SEAL - Estilo autêntico ---- */
 .wax-seal {
   position: absolute;
   bottom: 35%;
   left: 50%;
   transform: translateX(-50%);
-  width: 70px;
-  height: 70px;
+  width: 75px;
+  height: 75px;
   z-index: var(--z-seal);
   transition: transform var(--transition-medium), opacity var(--transition-medium);
 }
 
 .wax-seal-circle {
+  position: relative;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 30% 30%,
-      var(--color-coral) 0%,
-      var(--color-burgundy) 50%,
-      var(--color-burgundy-dark) 100%);
-  border-radius: 50%;
+  /* Cor de cera autêntica - burgundy profundo */
+  background: radial-gradient(
+    ellipse 70% 70% at 35% 35%,
+    #9a2828 0%,
+    #6d1a1a 40%,
+    #4a1212 70%,
+    #3a0e0e 100%
+  );
+  /* Borda irregular orgânica - não é um círculo perfeito */
+  border-radius: 48% 52% 50% 50% / 51% 49% 51% 49%;
   box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.3),
-    inset 0 2px 4px rgba(255, 255, 255, 0.2);
+    0 3px 10px rgba(0, 0, 0, 0.4),
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    inset 1px 2px 4px rgba(255, 180, 180, 0.1),
+    inset -1px -1px 3px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.wax-seal-initials {
-  font-family: var(--font-script);
-  font-size: 1.5rem;
-  color: var(--color-gold);
+/* Pingo de cera - lado esquerdo */
+.wax-seal-circle::before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 18%;
+  width: 14px;
+  height: 16px;
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    #6d1a1a 0%,
+    #4a1212 60%,
+    #3a0e0e 100%
+  );
+  border-radius: 45% 55% 55% 45% / 35% 35% 65% 65%;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Seal breaks when envelope opens */
+/* Pingo de cera - lado direito */
+.wax-seal-circle::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  right: 22%;
+  width: 10px;
+  height: 12px;
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    #6d1a1a 0%,
+    #4a1212 60%,
+    #3a0e0e 100%
+  );
+  border-radius: 50% 50% 55% 45% / 40% 40% 60% 60%;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.wax-seal-initials {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #d4b060;
+  text-shadow: 
+    1px 1px 1px rgba(0, 0, 0, 0.4),
+    -0.5px -0.5px 0px rgba(255, 200, 200, 0.1);
+  letter-spacing: 0.02em;
+  /* Efeito de relevo/embossed */
+  position: relative;
+  z-index: 1;
+}
+
+/* Selo quebra quando envelope abre */
 .wax-seal.broken {
-  transform: translateX(-50%) scale(0.8);
+  transform: translateX(-50%) scale(0.85) rotate(-8deg);
   opacity: 0;
 }
 

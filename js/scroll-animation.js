@@ -37,8 +37,11 @@
       photo2: { start: 0.85, end: 0.95 },
     },
 
+    // Envelope shadow removal threshold
+    envelopeOpenedThreshold: 0.20, // When to remove heavy shadow
+
     // Animation values
-    flapMaxRotation: 180,        // Degrees the flap rotates
+    flapMaxRotation: 165,        // Degrees the flap rotates (165 = stays visible as tab)
     cardStartY: 80,              // Initial Y offset for cards (inside envelope, relative to envelope)
     cardStartScale: 0.85,        // Initial scale for cards
   };
@@ -50,6 +53,7 @@
     scrollHint: document.getElementById('scrollHint'),
     introText: document.getElementById('introText'),
     envelopeScene: document.querySelector('.envelope-scene'),
+    envelopeBody: document.querySelector('.envelope-body'),
     envelopeFlap: document.getElementById('envelopeFlap'),
     envelopeLiner: document.getElementById('envelopeLiner'),
     waxSeal: document.getElementById('waxSeal'),
@@ -173,6 +177,17 @@
   }
 
   /**
+   * Animate envelope shadow (remove pyramid effect after opening)
+   */
+  function animateEnvelopeShadow(progress) {
+    if (progress > CONFIG.envelopeOpenedThreshold) {
+      elements.envelopeBody.classList.add('opened');
+    } else {
+      elements.envelopeBody.classList.remove('opened');
+    }
+  }
+
+  /**
    * Animate the wax seal breaking
    */
   function animateWaxSeal(progress) {
@@ -276,6 +291,7 @@
     animateIntroText(progress);
     animateEnvelopePosition(progress);
     animateEnvelopeFlap(progress);
+    animateEnvelopeShadow(progress);
     animateWaxSeal(progress);
     animateEnvelopeLiner(progress);
     animateFloralDecorations(progress);

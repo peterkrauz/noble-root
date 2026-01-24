@@ -20,6 +20,21 @@
   transform-style: preserve-3d;
 }
 
+/* Triângulo no topo quando envelope abre (ponta para cima) */
+.envelope.flap-open::after {
+  content: '';
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 45px;
+  background: #d4d0b8;
+  /* Triângulo com ponta para cima: base embaixo, ponta no topo */
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  z-index: calc(var(--z-envelope) - 1);
+}
+
 /* ---- ENVELOPE BODY ---- */
 .envelope-body {
   position: absolute;
@@ -38,6 +53,7 @@
 .envelope-body.opened {
   box-shadow: none;
 }
+
 
 /* Envelope texture overlay - textura de papel fosco */
 .envelope-body::before {
@@ -92,9 +108,15 @@
   z-index: var(--z-flap);
   /* Initial state: closed */
   transform: rotateX(0deg);
-  transition: transform 0.1s linear;
+  transition: transform 0.1s linear, z-index 0.3s ease;
   /* Sem sombra na aba */
   box-shadow: none;
+}
+
+/* Quando aberta, a aba vai para trás do envelope e fica invisível */
+.envelope-flap.behind {
+  z-index: calc(var(--z-envelope) - 1);
+  visibility: hidden;
 }
 
 .envelope-flap-front {
@@ -193,9 +215,9 @@
 }
 
 .wax-seal-initials {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  font-weight: 500;
+  font-family: var(--font-script);
+  font-size: 1.8rem;
+  font-weight: 400;
   color: #d4b060;
   text-shadow: 
     1px 1px 1px rgba(0, 0, 0, 0.4),

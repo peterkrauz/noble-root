@@ -41,7 +41,7 @@
     envelopeOpenedThreshold: 0.20, // When to remove heavy shadow
 
     // Animation values
-    flapMaxRotation: 165,        // Degrees the flap rotates (165 = stays visible as tab)
+    flapMaxRotation: 200,        // Degrees the flap rotates (200 = goes behind envelope)
     cardStartY: 80,              // Initial Y offset for cards (inside envelope, relative to envelope)
     cardStartScale: 0.85,        // Initial scale for cards
   };
@@ -53,6 +53,7 @@
     scrollHint: document.getElementById('scrollHint'),
     introText: document.getElementById('introText'),
     envelopeScene: document.querySelector('.envelope-scene'),
+    envelope: document.querySelector('.envelope'),
     envelopeBody: document.querySelector('.envelope-body'),
     envelopeFlap: document.getElementById('envelopeFlap'),
     envelopeLiner: document.getElementById('envelopeLiner'),
@@ -174,6 +175,15 @@
     );
 
     elements.envelopeFlap.style.transform = `rotateX(${rotation}deg)`;
+    
+    // Quando a aba abre mais de 90 graus, ela vai para trás do envelope
+    if (rotation > 90) {
+      elements.envelopeFlap.classList.add('behind');
+      elements.envelope.classList.add('flap-open');
+    } else {
+      elements.envelopeFlap.classList.remove('behind');
+      elements.envelope.classList.remove('flap-open');
+    }
   }
 
   /**

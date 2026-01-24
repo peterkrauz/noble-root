@@ -56,6 +56,7 @@
     envelope: document.querySelector('.envelope'),
     envelopeBody: document.querySelector('.envelope-body'),
     envelopeFlap: document.getElementById('envelopeFlap'),
+    envelopeFlapBack: document.querySelector('.envelope-flap-back'),
     envelopeLiner: document.getElementById('envelopeLiner'),
     waxSeal: document.getElementById('waxSeal'),
     floralLeft: document.getElementById('floralLeft'),
@@ -180,9 +181,11 @@
     if (rotation > 90) {
       elements.envelopeFlap.classList.add('behind');
       elements.envelope.classList.add('flap-open');
+      elements.envelopeFlapBack.classList.add('visible');
     } else {
       elements.envelopeFlap.classList.remove('behind');
       elements.envelope.classList.remove('flap-open');
+      elements.envelopeFlapBack.classList.remove('visible');
     }
   }
 

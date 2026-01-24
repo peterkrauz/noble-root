@@ -20,21 +20,6 @@
   transform-style: preserve-3d;
 }
 
-/* Triângulo no topo quando envelope abre (ponta para cima) */
-.envelope.flap-open::after {
-  content: '';
-  position: absolute;
-  top: -45px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50%;
-  height: 45px;
-  background: #d4d0b8;
-  /* Triângulo com ponta para cima: base embaixo, ponta no topo */
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  z-index: calc(var(--z-envelope) - 1);
-}
-
 /* ---- ENVELOPE BODY ---- */
 .envelope-body {
   position: absolute;
@@ -113,10 +98,9 @@
   box-shadow: none;
 }
 
-/* Quando aberta, a aba vai para trás do envelope e fica invisível */
+/* Quando aberta, a aba vai para trás do envelope */
 .envelope-flap.behind {
   z-index: calc(var(--z-envelope) - 1);
-  visibility: hidden;
 }
 
 .envelope-flap-front {
@@ -132,14 +116,23 @@
 .envelope-flap-back {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 30%;
+  bottom: 0;
   /* Interior fosco do envelope - cor sólida sem sombra */
   background: #d4d0b8;
-  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  /* INVERTIDO: ponta para cima, base para baixo */
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   transform: rotateX(180deg);
   backface-visibility: hidden;
-  /* Sem sombra para conexão limpa */
   box-shadow: none;
+  /* Invisível inicialmente */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Flap-back visível quando envelope abre */
+.envelope-flap-back.visible {
+  opacity: 1;
 }
 
 /* ---- WAX SEAL - Estilo autêntico ---- */

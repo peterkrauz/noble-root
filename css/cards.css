@@ -110,6 +110,24 @@
   transform: rotateY(180deg);
 }
 
+/* ---- POSITIONED STATE (Cards sit just outside envelope) ---- */
+/* Layout: two on left, two on right - centered around envelope's visual position */
+.stacking-card.emerged.positioned[data-card-index="0"] {
+  transform: translate(calc(-50% - 8vw), calc(-50% + 18vh)) scale(0.65) rotate(-2deg) !important;   /* LEFT - upper */
+}
+
+.stacking-card.emerged.positioned[data-card-index="1"] {
+  transform: translate(calc(-50% + 25vw), calc(-50% + 18vh)) scale(0.65) rotate(2deg) !important;    /* RIGHT - upper */
+}
+
+.stacking-card.emerged.positioned[data-card-index="2"] {
+  transform: translate(calc(-50% - 8vw), calc(-50% + 28vh)) scale(0.65) rotate(-1.5deg) !important; /* LEFT - lower */
+}
+
+.stacking-card.emerged.positioned[data-card-index="3"] {
+  transform: translate(calc(-50% + 25vw), calc(-50% + 28vh)) scale(0.65) rotate(1.5deg) !important;  /* RIGHT - lower */
+}
+
 /* ============================================
    CARD FRONT STYLES - Individual Card Designs
    ============================================ */

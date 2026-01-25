@@ -49,6 +49,30 @@
   pointer-events: none;
 }
 
+/* ---- ENVELOPE INTERIOR (Decorative folds) ---- */
+.envelope-interior {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Triangulo inferior (V shape pointing up) */
+.envelope-interior::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  background: 
+    linear-gradient(to bottom right, transparent 49.5%, #a89352 50%) left,
+    linear-gradient(to bottom left, transparent 49.5%, #a89352 50%) right;
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+  opacity: 0.25;
+}
+
 /* ---- ENVELOPE LINER (Inside) ---- */
 .envelope-liner {
   position: absolute;

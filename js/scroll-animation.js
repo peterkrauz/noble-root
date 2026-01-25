@@ -27,13 +27,14 @@
     envelopeMoveEnd: 0.25,       // When envelope reaches final position
     envelopeFinalY: 25,          // Final Y position (vh from center, 25 = 10% higher than before)
 
-    // Stacking cards - emergence and flip thresholds
-    // Gap of ~0.10 between each flip and next emerge for backside viewing time
+    // Stacking cards - emergence, flip, and position thresholds
+    // Cards emerge, flip to show back, then move to their corner position
+    // All animations complete by 73%, leaving 27% buffer before details section
     stackingCards: {
-      abertura: { emerge: 0.22, flip: 0.32 },
-      local: { emerge: 0.42, flip: 0.52 },
-      info: { emerge: 0.62, flip: 0.72 },
-      rsvp: { emerge: 0.82, flip: 0.92 },
+      abertura: { emerge: 0.12, flip: 0.20, position: 0.25 },
+      local:    { emerge: 0.28, flip: 0.36, position: 0.41 },
+      info:     { emerge: 0.44, flip: 0.52, position: 0.57 },
+      rsvp:     { emerge: 0.60, flip: 0.68, position: 0.73 },
     },
 
     // Envelope shadow removal threshold
@@ -172,7 +173,7 @@
     );
 
     elements.envelopeFlap.style.transform = `rotateX(${rotation}deg)`;
-    
+
     // Quando a aba abre mais de 90 graus, ela vai para trás do envelope
     if (rotation > 90) {
       elements.envelopeFlap.classList.add('behind');
@@ -232,15 +233,18 @@
   }
 
   /**
-   * Animate a single stacking card (emerge and flip)
+   * Animate a single stacking card (emerge, flip, and position)
    */
   function animateStackingCard(card, progress, cardConfig) {
     if (!card) return;
 
-    const { emerge, flip } = cardConfig;
+    const { emerge, flip, position } = cardConfig;
 
     // Check if card should emerge
     if (progress >= emerge) {
+      if (!card.classList.contains('emerged')) {
+        console.log(`[${card.id}] EMERGED at progress ${(progress * 100).toFixed(1)}%`);
+      }
       card.classList.add('emerged');
     } else {
       card.classList.remove('emerged');
@@ -248,9 +252,26 @@
 
     // Check if card should flip
     if (progress >= flip) {
+      if (!card.classList.contains('flipped')) {
+        console.log(`[${card.id}] FLIPPED at progress ${(progress * 100).toFixed(1)}%`);
+      }
       card.classList.add('flipped');
     } else {
       card.classList.remove('flipped');
+    }
+
+    // Check if card should move to its corner position
+    if (progress >= position) {
+      if (!card.classList.contains('positioned')) {
+        console.log(`[${card.id}] POSITIONED at progress ${(progress * 100).toFixed(1)}%`);
+        console.log(`[${card.id}] Classes now: ${card.className}`);
+        // Log computed transform
+        const computed = window.getComputedStyle(card);
+        console.log(`[${card.id}] Computed transform: ${computed.transform}`);
+      }
+      card.classList.add('positioned');
+    } else {
+      card.classList.remove('positioned');
     }
   }
 
@@ -270,8 +291,18 @@
 
   let ticking = false;
 
+  // Track last logged progress to avoid spam
+  let lastLoggedProgress = -1;
+
   function updateAnimations() {
     const progress = getScrollProgress();
+
+    // Log progress every 5% to track scrolling
+    const progressPercent = Math.floor(progress * 20) * 5; // Round to nearest 5%
+    if (progressPercent !== lastLoggedProgress) {
+      console.log(`📜 Scroll progress: ${progressPercent}% (raw: ${(progress * 100).toFixed(2)}%)`);
+      lastLoggedProgress = progressPercent;
+    }
 
     // Run all animations
     animateScrollHint(progress);
@@ -299,6 +330,22 @@
   // ============================================
 
   function init() {
+    // Log config for debugging
+    console.log('=== WEDDING SCROLL ANIMATION DEBUG ===');
+    console.log('Card thresholds (emerge / flip / position):');
+    console.log(`  Abertura: ${CONFIG.stackingCards.abertura.emerge} / ${CONFIG.stackingCards.abertura.flip} / ${CONFIG.stackingCards.abertura.position}`);
+    console.log(`  Local:    ${CONFIG.stackingCards.local.emerge} / ${CONFIG.stackingCards.local.flip} / ${CONFIG.stackingCards.local.position}`);
+    console.log(`  Info:     ${CONFIG.stackingCards.info.emerge} / ${CONFIG.stackingCards.info.flip} / ${CONFIG.stackingCards.info.position}`);
+    console.log(`  RSVP:     ${CONFIG.stackingCards.rsvp.emerge} / ${CONFIG.stackingCards.rsvp.flip} / ${CONFIG.stackingCards.rsvp.position}`);
+
+    // Log card elements found
+    console.log('Card elements found:');
+    console.log(`  cardAbertura: ${elements.cardAbertura ? 'YES' : 'NO'}`);
+    console.log(`  cardLocal: ${elements.cardLocal ? 'YES' : 'NO'}`);
+    console.log(`  cardInfo: ${elements.cardInfo ? 'YES' : 'NO'}`);
+    console.log(`  cardRsvpNew: ${elements.cardRsvpNew ? 'YES' : 'NO'}`);
+    console.log('=======================================');
+
     // Set initial states
     updateAnimations();
 
@@ -308,7 +355,7 @@
     // Handle resize
     window.addEventListener('resize', updateAnimations, { passive: true });
 
-    console.log('Wedding scroll animation initialized');
+    console.log('Wedding scroll animation initialized - scroll to see progress logs');
   }
 
   // Start when DOM is ready

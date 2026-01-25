@@ -111,21 +111,21 @@
 }
 
 /* ---- POSITIONED STATE (Cards sit just outside envelope) ---- */
-/* Layout: two on left, two on right - centered around envelope's visual position */
+/* Layout: grid around envelope - two upper, two lower */
 .stacking-card.emerged.positioned[data-card-index="0"] {
-  transform: translate(calc(-50% - 8vw), calc(-50% + 18vh)) scale(0.65) rotate(-2deg) !important;   /* LEFT - upper */
+  transform: translate(calc(-50% - 8vw), calc(-50% + 2vh)) scale(0.65) rotate(-2deg) !important;    /* LEFT - upper */
 }
 
 .stacking-card.emerged.positioned[data-card-index="1"] {
-  transform: translate(calc(-50% + 25vw), calc(-50% + 18vh)) scale(0.65) rotate(2deg) !important;    /* RIGHT - upper */
+  transform: translate(calc(-50% + 25vw), calc(-50% + 2vh)) scale(0.65) rotate(2deg) !important;    /* RIGHT - upper */
 }
 
 .stacking-card.emerged.positioned[data-card-index="2"] {
-  transform: translate(calc(-50% - 8vw), calc(-50% + 28vh)) scale(0.65) rotate(-1.5deg) !important; /* LEFT - lower */
+  transform: translate(calc(-50% - 8vw), calc(-50% + 32vh)) scale(0.65) rotate(-1.5deg) !important; /* LEFT - lower */
 }
 
 .stacking-card.emerged.positioned[data-card-index="3"] {
-  transform: translate(calc(-50% + 8vw), calc(-50% + 28vh)) scale(0.65) rotate(0deg) !important;  /* CENTER - RSVP stays front and center */
+  transform: translate(calc(-50% + 25vw), calc(-50% + 32vh)) scale(0.65) rotate(1.5deg) !important; /* RIGHT - lower (RSVP) */
 }
 
 /* ============================================

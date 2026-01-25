@@ -195,37 +195,7 @@
   justify-content: center;
 }
 
-/* Pingo de cera - lado esquerdo */
-.wax-seal-circle::before {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 18%;
-  width: 14px;
-  height: 16px;
-  background: radial-gradient(ellipse at 50% 30%,
-      #6d1a1a 0%,
-      #4a1212 60%,
-      #3a0e0e 100%);
-  border-radius: 45% 55% 55% 45% / 35% 35% 65% 65%;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-}
 
-/* Pingo de cera - lado direito */
-.wax-seal-circle::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  right: 22%;
-  width: 10px;
-  height: 12px;
-  background: radial-gradient(ellipse at 50% 30%,
-      #6d1a1a 0%,
-      #4a1212 60%,
-      #3a0e0e 100%);
-  border-radius: 50% 50% 55% 45% / 40% 40% 60% 60%;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-}
 
 .wax-seal-initials {
   font-family: var(--font-script);

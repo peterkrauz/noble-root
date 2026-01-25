@@ -14,10 +14,10 @@
     rel="stylesheet">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/variables.css?v=8">
-  <link rel="stylesheet" href="css/base.css?v=8">
-  <link rel="stylesheet" href="css/envelope.css?v=8">
-  <link rel="stylesheet" href="css/cards.css?v=8">
+  <link rel="stylesheet" href="css/variables.css?v=10">
+  <link rel="stylesheet" href="css/base.css?v=10">
+  <link rel="stylesheet" href="css/envelope.css?v=10">
+  <link rel="stylesheet" href="css/cards.css?v=11">
 
   <!-- Favicon -->
   <link rel="icon"
@@ -83,55 +83,71 @@
         </div>
 
         <!-- ============================================
-             CONTAINER DOS CARTÕES
+             CONTAINER DOS CARTÕES - STACKING FLIP CARDS
              ============================================ -->
-        <div class="cards-container" id="cardsContainer">
+        <div class="stacking-cards-container" id="stackingCards">
 
-          <!-- Cartão de Nomes -->
-          <div class="card card-names" id="cardNames">
-            <p class="card-label">venha pelo amor fique pelo tiramisú</p>
-            <div class="couple-names">
-              <span>Carol</span>
-              <span class="ampersand">&</span>
-              <span>Peter</span>
+          <!-- Card 1: ABERTURA -->
+          <div class="stacking-card" id="cardAbertura" data-card-index="0">
+            <div class="card-inner">
+              <div class="card-face card-front card-front-abertura">
+                <p class="card-label">venha pelo amor fique pelo tiramisú</p>
+                <div class="couple-names">
+                  <span>Carol</span>
+                  <span class="ampersand">&</span>
+                  <span>Peter</span>
+                </div>
+              </div>
+              <div class="card-face card-back card-back-abertura">
+                <p class="back-title">30 de Maio, 2026</p>
+                <p class="back-time">Recepção: 14h</p>
+                <p class="back-time">Cerimônia: 16h</p>
+              </div>
             </div>
           </div>
 
-          <!-- Cartão de Data -->
-          <div class="card card-date" id="cardDate">
-            <p class="date-day">30</p>
-            <p class="date-month">Maio</p>
-            <p class="date-year">2026</p>
-            <p class="venue-time">
-              Às 14h<br>
-              Casa Maciço<br>
-              Florianópolis, SC
-            </p>
-          </div>
-
-          <!-- Botão de Detalhes -->
-          <a href="#details" class="card card-details-btn" id="cardDetails">
-            <span class="btn-label">Clique para</span>
-            <span class="btn-text">Detalhes</span>
-          </a>
-
-          <!-- Cartão de Confirmação -->
-          <a href="https://forms.google.com/your-form-link" target="_blank" rel="noopener" class="card card-rsvp"
-            id="cardRsvp">
-            <div class="rsvp-seal">
-              <span>C&P</span>
+          <!-- Card 2: LOCAL -->
+          <div class="stacking-card" id="cardLocal" data-card-index="1">
+            <div class="card-inner">
+              <div class="card-face card-front card-front-local">
+                <p class="card-title">Onde nos encontramos</p>
+                <p class="card-venue">Casa Maciço</p>
+                <p class="card-address">Florianópolis, SC</p>
+              </div>
+              <div class="card-face card-back card-back-local">
+                <p class="back-title">Como Chegar</p>
+                <p class="back-placeholder">[Mapa em breve]</p>
+              </div>
             </div>
-            <p class="rsvp-label">Gentilmente</p>
-            <p class="rsvp-text">Confirme</p>
-            <p class="rsvp-here">Aqui</p>
-          </a>
-
-          <!-- Cartões de Ilustração -->
-          <div class="card card-photo card-photo-1" id="cardPhoto1">
-            <img src="elements/casal-dourado.png" alt="Ilustração do casal" class="card-illustration">
           </div>
-          <div class="card card-photo card-photo-2" id="cardPhoto2">
-            <img src="elements/buque-dourado.png" alt="Ilustração de buquê" class="card-illustration">
+
+          <!-- Card 3: INFO -->
+          <div class="stacking-card" id="cardInfo" data-card-index="2">
+            <div class="card-inner">
+              <div class="card-face card-front card-front-info">
+                <p class="card-title">Dress Code</p>
+                <p class="card-dresscode">Traje Esporte Fino</p>
+              </div>
+              <div class="card-face card-back card-back-info">
+                <p class="back-title">Mais Informações</p>
+                <p class="back-placeholder">[Em breve]</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: RSVP -->
+          <div class="stacking-card" id="cardRsvpNew" data-card-index="3">
+            <div class="card-inner">
+              <div class="card-face card-front card-front-rsvp">
+                <div class="rsvp-seal"><span>C&P</span></div>
+                <p class="card-title">Confirme sua Presença</p>
+                <a href="https://forms.google.com/your-form-link" target="_blank" rel="noopener" class="rsvp-button">Responder</a>
+              </div>
+              <div class="card-face card-back card-back-rsvp">
+                <p class="back-title">Prazo</p>
+                <p class="back-deadline">Até 30 de Abril</p>
+              </div>
+            </div>
           </div>
 
         </div>

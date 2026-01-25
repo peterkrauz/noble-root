@@ -1,328 +1,386 @@
 /* ============================================
-   CARDS STYLES - Wedding Info Cards
+   STACKING FLIP CARDS - Wedding Info Cards
    Carol & Peter's Wedding
    ============================================ */
 
-/* ---- CARDS CONTAINER ---- */
-.cards-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
+/* ---- STACKING CARDS CONTAINER ---- */
+.stacking-cards-container {
+  position: fixed;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(320px, 85vw);
+  height: min(420px, 60vh);
+  perspective: 1500px;
+  pointer-events: none;
+  z-index: var(--z-cards);
 }
 
-/* ---- BASE CARD STYLES ---- */
-.card {
-    position: absolute;
-    background: var(--color-white);
-    border-radius: 4px;
-    box-shadow: var(--shadow-medium);
-    padding: var(--spacing-md);
-    text-align: center;
-    pointer-events: auto;
-    /* Initial state: hidden inside envelope */
-    opacity: 0;
-    transform: translateY(100px) scale(0.9);
-    transition: transform 0.1s linear, opacity 0.1s linear;
+/* ---- BASE STACKING CARD ---- */
+.stacking-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  /* Initial state: hidden below, scaled down */
+  opacity: 0;
+  transform: translateY(150px) scale(0.85);
+  pointer-events: none;
 }
 
-/* ---- NAMES CARD (Gold gradient) ---- */
-.card-names {
-    width: min(280px, 70vw);
-    min-height: 200px;
-    background: linear-gradient(135deg,
-            var(--color-gold) 0%,
-            var(--color-gold-dark) 100%);
-    color: var(--color-burgundy-dark);
-    z-index: calc(var(--z-cards) + 3);
-    /* Final position: upper left */
-    --final-x: -180px;
-    --final-y: -800px;
-    --final-rotate: -3deg;
+/* Card z-index based on index (later cards on top) */
+.stacking-card[data-card-index="0"] {
+  z-index: 1;
 }
 
-.card-names .card-label {
-    font-family: var(--font-sans);
-    font-size: 0.6rem;
-    font-weight: 400;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    opacity: 0.9;
-    margin-bottom: var(--spacing-sm);
+.stacking-card[data-card-index="1"] {
+  z-index: 2;
 }
 
-.card-names .couple-names {
-    font-family: var(--font-script);
-    font-size: clamp(2.5rem, 6vw, 3.5rem);
-    line-height: 1.1;
+.stacking-card[data-card-index="2"] {
+  z-index: 3;
 }
 
-.card-names .ampersand {
-    display: block;
-    font-size: 2rem;
-    margin: 0.15rem 0;
-    font-family: var(--font-script);
+.stacking-card[data-card-index="3"] {
+  z-index: 4;
 }
 
-/* Decorative dots on names card */
-.card-names::before {
-    content: '';
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 6px;
-    height: 6px;
-    background: var(--color-cream);
-    border-radius: 50%;
-    opacity: 0.5;
-    box-shadow:
-        -12px 0 0 var(--color-cream),
-        -24px 0 0 var(--color-cream),
-        0 12px 0 var(--color-cream),
-        -12px 12px 0 var(--color-cream);
+/* ---- CARD INNER (Flip Container) ---- */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ---- DATE CARD (Cream with Burgundy border) ---- */
-.card-date {
-    width: min(220px, 55vw);
-    min-height: 180px;
-    background: var(--color-cream);
-    border: 3px solid var(--color-burgundy);
-    z-index: calc(var(--z-cards) + 2);
-    /* Final position: upper right */
-    --final-x: 200px;
-    --final-y: -760px;
-    --final-rotate: 2deg;
+/* ---- CARD FACES ---- */
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(79, 20, 20, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--spacing-lg);
+  overflow: hidden;
 }
 
-.card-date .date-day {
-    font-family: var(--font-sans);
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: var(--color-burgundy);
-    line-height: 1;
+/* Back face is rotated 180deg */
+.card-back {
+  transform: rotateY(180deg);
 }
 
-.card-date .date-month {
-    font-family: var(--font-script);
-    font-size: 2.5rem;
-    color: var(--color-burgundy);
-    margin: 0.25rem 0;
+/* ---- EMERGED STATE (Card visible) ---- */
+.stacking-card.emerged {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.card-date .date-year {
-    font-family: var(--font-sans);
-    font-size: 1.25rem;
-    font-weight: 300;
-    color: var(--color-burgundy);
-    margin-bottom: var(--spacing-sm);
+/* Stacking offset - each emerged card slightly offset */
+.stacking-card.emerged[data-card-index="0"] {
+  transform: translateY(-10px) scale(1);
 }
 
-.card-date .venue-time {
-    font-family: var(--font-sans);
-    font-size: 0.55rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-gold-dark);
-    line-height: 1.8;
+.stacking-card.emerged[data-card-index="1"] {
+  transform: translateY(-5px) scale(0.98);
 }
 
-/* Burgundy corner accents */
-.card-date::before,
-.card-date::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--color-burgundy);
+.stacking-card.emerged[data-card-index="2"] {
+  transform: translateY(0px) scale(0.96);
 }
 
-.card-date::before {
-    top: 8px;
-    left: 8px;
-    border-right: none;
-    border-bottom: none;
+.stacking-card.emerged[data-card-index="3"] {
+  transform: translateY(5px) scale(0.94);
 }
 
-.card-date::after {
-    bottom: 8px;
-    right: 8px;
-    border-left: none;
-    border-top: none;
+/* ---- FLIPPED STATE ---- */
+.stacking-card.flipped .card-inner {
+  transform: rotateY(180deg);
 }
 
-/* ---- DETAILS BUTTON ---- */
-.card-details-btn {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-coral) 0%, var(--color-coral-dark) 100%);
-    color: var(--color-text-light);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-sm);
-    cursor: pointer;
-    z-index: calc(var(--z-cards) + 1);
-    /* Final position: right side */
-    --final-x: 280px;
-    --final-y: -570px;
-    --final-rotate: 5deg;
-    transition: transform 0.1s linear, opacity 0.1s linear, background-color var(--transition-fast);
+/* ============================================
+   CARD FRONT STYLES - Individual Card Designs
+   ============================================ */
+
+/* ---- ABERTURA CARD (Gold Gradient) ---- */
+.card-front-abertura {
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+  color: var(--color-burgundy-dark);
 }
 
-.card-details-btn:hover {
-    background: linear-gradient(135deg, var(--color-coral-dark) 0%, var(--color-burgundy) 100%);
+.card-front-abertura .card-label {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: var(--spacing-sm);
 }
 
-.card-details-btn .btn-label {
-    font-family: var(--font-sans);
-    font-size: 0.45rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.25rem;
+.card-front-abertura .couple-names {
+  font-family: var(--font-script);
+  font-size: clamp(2.8rem, 8vw, 4rem);
+  line-height: 1.1;
 }
 
-.card-details-btn .btn-text {
-    font-family: var(--font-script);
-    font-size: 1.5rem;
+.card-front-abertura .ampersand {
+  display: block;
+  font-size: 2.2rem;
+  margin: 0.2rem 0;
+  font-family: var(--font-script);
+}
+
+/* Decorative dots */
+.card-front-abertura::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 6px;
+  height: 6px;
+  background: var(--color-cream);
+  border-radius: 50%;
+  opacity: 0.5;
+  box-shadow:
+    -12px 0 0 var(--color-cream),
+    -24px 0 0 var(--color-cream),
+    0 12px 0 var(--color-cream),
+    -12px 12px 0 var(--color-cream);
+}
+
+/* ---- ABERTURA BACK ---- */
+.card-back-abertura {
+  background: var(--color-cream);
+  color: var(--color-burgundy-dark);
+  border: 3px solid var(--color-burgundy);
+}
+
+.card-back-abertura .back-title {
+  font-family: var(--font-script);
+  font-size: 2rem;
+  color: var(--color-burgundy);
+  margin-bottom: var(--spacing-md);
+}
+
+.card-back-abertura .back-time {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--color-gold-dark);
+  margin: 0.5rem 0;
+}
+
+/* ---- LOCAL CARD ---- */
+.card-front-local {
+  background: var(--color-cream);
+  color: var(--color-burgundy-dark);
+  border: 3px solid var(--color-gold);
+}
+
+.card-front-local .card-title {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-front-local .card-venue {
+  font-family: var(--font-script);
+  font-size: 2.5rem;
+  color: var(--color-burgundy);
+  margin-bottom: 0.5rem;
+}
+
+.card-front-local .card-address {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-gold-dark);
+}
+
+/* ---- LOCAL BACK ---- */
+.card-back-local {
+  background: var(--color-burgundy-dark);
+  color: var(--color-cream);
+}
+
+.card-back-local .back-title {
+  font-family: var(--font-script);
+  font-size: 1.8rem;
+  color: var(--color-gold);
+  margin-bottom: var(--spacing-md);
+}
+
+.card-back-local .back-placeholder {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--color-cream);
+  opacity: 0.7;
+}
+
+/* ---- INFO CARD ---- */
+.card-front-info {
+  background: linear-gradient(135deg, var(--color-burgundy) 0%, var(--color-burgundy-dark) 100%);
+  color: var(--color-cream);
+}
+
+.card-front-info .card-title {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-front-info .card-dresscode {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: var(--color-cream);
+}
+
+/* ---- INFO BACK ---- */
+.card-back-info {
+  background: var(--color-cream);
+  color: var(--color-burgundy-dark);
+  border: 3px solid var(--color-burgundy);
+}
+
+.card-back-info .back-title {
+  font-family: var(--font-script);
+  font-size: 1.8rem;
+  color: var(--color-burgundy);
+  margin-bottom: var(--spacing-md);
+}
+
+.card-back-info .back-placeholder {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--color-gold-dark);
+  opacity: 0.7;
 }
 
 /* ---- RSVP CARD ---- */
-.card-rsvp {
-    width: min(180px, 45vw);
-    min-height: 140px;
-    background: linear-gradient(135deg,
-            var(--color-cream) 0%,
-            var(--color-cream-dark) 100%);
-    border: 2px solid var(--color-gold);
-    z-index: var(--z-cards);
-    cursor: pointer;
-    /* Final position: left side */
-    --final-x: -270px;
-    --final-y: -570px;
-    --final-rotate: -5deg;
-    transition: transform 0.1s linear, opacity 0.1s linear, box-shadow var(--transition-fast);
+.card-front-rsvp {
+  background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-cream-dark) 100%);
+  color: var(--color-burgundy-dark);
+  border: 3px solid var(--color-coral);
 }
 
-.card-rsvp:hover {
-    box-shadow: var(--shadow-strong);
+.card-front-rsvp .rsvp-seal {
+  width: 60px;
+  height: 60px;
+  margin-bottom: var(--spacing-md);
+  background: radial-gradient(circle at 30% 30%,
+      var(--color-coral) 0%,
+      var(--color-burgundy) 50%,
+      var(--color-burgundy-dark) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.card-rsvp .rsvp-seal {
-    width: 40px;
-    height: 40px;
-    margin: 0 auto var(--spacing-sm);
-    background: radial-gradient(circle at 30% 30%,
-            var(--color-coral) 0%,
-            var(--color-burgundy) 50%,
-            var(--color-burgundy-dark) 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-script);
-    font-size: 1rem;
-    color: var(--color-gold);
+.card-front-rsvp .rsvp-seal span {
+  font-family: var(--font-script);
+  font-size: 1.4rem;
+  color: var(--color-gold);
 }
 
-.card-rsvp .rsvp-label {
-    font-family: var(--font-script);
-    font-size: 1rem;
-    color: var(--color-gold-dark);
+.card-front-rsvp .card-title {
+  font-family: var(--font-script);
+  font-size: 1.6rem;
+  color: var(--color-burgundy);
+  margin-bottom: var(--spacing-md);
 }
 
-.card-rsvp .rsvp-text {
-    font-family: var(--font-script);
-    font-size: 2rem;
-    color: var(--color-burgundy);
-    margin: 0.25rem 0;
+.card-front-rsvp .rsvp-button {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: linear-gradient(135deg, var(--color-coral) 0%, var(--color-coral-dark) 100%);
+  color: var(--color-text-light);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  pointer-events: auto;
 }
 
-.card-rsvp .rsvp-here {
-    font-family: var(--font-script);
-    font-size: 1.1rem;
-    color: var(--color-gold-dark);
+.card-front-rsvp .rsvp-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(252, 76, 41, 0.4);
 }
 
-/* ---- ILLUSTRATION CARDS (replacing photo placeholders) ---- */
-.card-photo {
-    width: min(160px, 40vw);
-    height: min(180px, 45vw);
-    padding: 0;
-    background: var(--color-burgundy-dark);
-    box-shadow: var(--shadow-soft);
-    overflow: hidden;
-    border-radius: 8px;
+/* ---- RSVP BACK ---- */
+.card-back-rsvp {
+  background: var(--color-coral);
+  color: var(--color-cream);
 }
 
-.card-photo-1 {
-    z-index: calc(var(--z-cards) - 1);
-    /* Final position: center-left area */
-    --final-x: -60px;
-    --final-y: -720px;
-    --final-rotate: 8deg;
+.card-back-rsvp .back-title {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+  opacity: 0.8;
+  margin-bottom: var(--spacing-sm);
 }
 
-.card-photo-2 {
-    z-index: calc(var(--z-cards) - 2);
-    /* Final position: upper right area */
-    --final-x: 380px;
-    --final-y: -840px;
-    --final-rotate: -6deg;
+.card-back-rsvp .back-deadline {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: var(--color-cream);
 }
 
-.card-illustration {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-}
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
 
-/* ---- VISIBLE STATE ---- */
-.card.visible {
-    opacity: 1;
-}
-
-/* ---- RESPONSIVE ADJUSTMENTS ---- */
 @media (max-width: 768px) {
-    .card-names {
-        --final-x: 0px;
-        --final-y: -820px;
-        --final-rotate: 0deg;
-    }
+  .stacking-cards-container {
+    width: min(300px, 90vw);
+    height: min(400px, 55vh);
+  }
 
-    .card-date {
-        --final-x: 0px;
-        --final-y: -640px;
-        --final-rotate: 0deg;
-    }
+  .card-front-abertura .couple-names {
+    font-size: clamp(2.2rem, 7vw, 3rem);
+  }
 
-    .card-details-btn {
-        --final-x: 100px;
-        --final-y: -540px;
-        --final-rotate: 0deg;
-    }
+  .card-front-local .card-venue {
+    font-size: 2rem;
+  }
 
-    .card-rsvp {
-        --final-x: -100px;
-        --final-y: -540px;
-        --final-rotate: 0deg;
-    }
+  .card-front-info .card-dresscode {
+    font-size: 1.8rem;
+  }
+}
 
-    .card-photo-1 {
-        --final-x: 0px;
-        --final-y: -920px;
-        --final-rotate: 5deg;
-    }
+@media (max-width: 480px) {
+  .stacking-cards-container {
+    width: 90vw;
+    height: 50vh;
+  }
 
-    .card-photo-2 {
-        display: none;
-    }
+  .card-face {
+    padding: var(--spacing-md);
+  }
 }

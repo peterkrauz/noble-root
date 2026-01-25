@@ -27,14 +27,12 @@
     envelopeMoveEnd: 0.25,       // When envelope reaches final position
     envelopeFinalY: 25,          // Final Y position (vh from center, 25 = 10% higher than before)
 
-    // Card emergence thresholds - SLOWER, more spaced out
-    cards: {
-      names: { start: 0.25, end: 0.40 },
-      date: { start: 0.40, end: 0.55 },
-      details: { start: 0.55, end: 0.70 },
-      rsvp: { start: 0.70, end: 0.85 },
-      photo1: { start: 0.80, end: 0.92 },
-      photo2: { start: 0.85, end: 0.95 },
+    // Stacking cards - emergence and flip thresholds
+    stackingCards: {
+      abertura: { emerge: 0.25, flip: 0.38 },
+      local: { emerge: 0.42, flip: 0.55 },
+      info: { emerge: 0.58, flip: 0.70 },
+      rsvp: { emerge: 0.73, flip: 0.85 },
     },
 
     // Envelope shadow removal threshold
@@ -42,8 +40,6 @@
 
     // Animation values
     flapMaxRotation: 200,        // Degrees the flap rotates (200 = goes behind envelope)
-    cardStartY: 80,              // Initial Y offset for cards (inside envelope, relative to envelope)
-    cardStartScale: 0.85,        // Initial scale for cards
   };
 
   // ============================================
@@ -61,13 +57,12 @@
     waxSeal: document.getElementById('waxSeal'),
     floralLeft: document.getElementById('floralLeft'),
     floralRight: document.getElementById('floralRight'),
-    cardsContainer: document.getElementById('cardsContainer'),
-    cardNames: document.getElementById('cardNames'),
-    cardDate: document.getElementById('cardDate'),
-    cardDetails: document.getElementById('cardDetails'),
-    cardRsvp: document.getElementById('cardRsvp'),
-    cardPhoto1: document.getElementById('cardPhoto1'),
-    cardPhoto2: document.getElementById('cardPhoto2'),
+    // Stacking cards
+    stackingCardsContainer: document.getElementById('stackingCards'),
+    cardAbertura: document.getElementById('cardAbertura'),
+    cardLocal: document.getElementById('cardLocal'),
+    cardInfo: document.getElementById('cardInfo'),
+    cardRsvpNew: document.getElementById('cardRsvpNew'),
     siteFooter: document.getElementById('siteFooter'),
   };
 
@@ -236,58 +231,36 @@
   }
 
   /**
-   * Animate a single card emerging from envelope
-   * Cards spill upward from the envelope which is now at the bottom
+   * Animate a single stacking card (emerge and flip)
    */
-  function animateCard(card, progress, cardConfig) {
+  function animateStackingCard(card, progress, cardConfig) {
     if (!card) return;
 
-    const { start, end } = cardConfig;
+    const { emerge, flip } = cardConfig;
 
-    // Calculate card animation progress
-    const cardProgress = clamp((progress - start) / (end - start), 0, 1);
-    const easedProgress = easeOutCubic(cardProgress);
-
-    // Get final position from CSS custom properties
-    const style = getComputedStyle(card);
-    const finalX = parseFloat(style.getPropertyValue('--final-x')) || 0;
-    const finalY = parseFloat(style.getPropertyValue('--final-y')) || 0;
-    const finalRotate = parseFloat(style.getPropertyValue('--final-rotate')) || 0;
-
-    // Calculate current values - cards start inside envelope and move UP (negative Y)
-    const currentY = lerp(CONFIG.cardStartY, finalY, easedProgress);
-    const currentX = lerp(0, finalX, easedProgress);
-    const currentScale = lerp(CONFIG.cardStartScale, 1, easedProgress);
-    const currentRotate = lerp(0, finalRotate, easedProgress);
-    const currentOpacity = easedProgress;
-
-    // Apply transforms
-    card.style.transform = `
-      translateX(${currentX}px)
-      translateY(${currentY}px)
-      scale(${currentScale})
-      rotate(${currentRotate}deg)
-    `;
-    card.style.opacity = currentOpacity;
-
-    // Add visible class when card is mostly visible
-    if (cardProgress > 0.5) {
-      card.classList.add('visible');
+    // Check if card should emerge
+    if (progress >= emerge) {
+      card.classList.add('emerged');
     } else {
-      card.classList.remove('visible');
+      card.classList.remove('emerged');
+    }
+
+    // Check if card should flip
+    if (progress >= flip) {
+      card.classList.add('flipped');
+    } else {
+      card.classList.remove('flipped');
     }
   }
 
   /**
-   * Animate all cards
+   * Animate all stacking cards
    */
-  function animateCards(progress) {
-    animateCard(elements.cardNames, progress, CONFIG.cards.names);
-    animateCard(elements.cardDate, progress, CONFIG.cards.date);
-    animateCard(elements.cardDetails, progress, CONFIG.cards.details);
-    animateCard(elements.cardRsvp, progress, CONFIG.cards.rsvp);
-    animateCard(elements.cardPhoto1, progress, CONFIG.cards.photo1);
-    animateCard(elements.cardPhoto2, progress, CONFIG.cards.photo2);
+  function animateStackingCards(progress) {
+    animateStackingCard(elements.cardAbertura, progress, CONFIG.stackingCards.abertura);
+    animateStackingCard(elements.cardLocal, progress, CONFIG.stackingCards.local);
+    animateStackingCard(elements.cardInfo, progress, CONFIG.stackingCards.info);
+    animateStackingCard(elements.cardRsvpNew, progress, CONFIG.stackingCards.rsvp);
   }
 
   // ============================================
@@ -308,7 +281,7 @@
     animateWaxSeal(progress);
     animateEnvelopeLiner(progress);
     animateFloralDecorations(progress);
-    animateCards(progress);
+    animateStackingCards(progress);
 
     ticking = false;
   }

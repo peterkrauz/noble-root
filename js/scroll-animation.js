@@ -28,11 +28,12 @@
     envelopeFinalY: 25,          // Final Y position (vh from center, 25 = 10% higher than before)
 
     // Stacking cards - emergence and flip thresholds
+    // Gap of ~0.10 between each flip and next emerge for backside viewing time
     stackingCards: {
-      abertura: { emerge: 0.25, flip: 0.38 },
-      local: { emerge: 0.42, flip: 0.55 },
-      info: { emerge: 0.58, flip: 0.70 },
-      rsvp: { emerge: 0.73, flip: 0.85 },
+      abertura: { emerge: 0.22, flip: 0.32 },
+      local: { emerge: 0.42, flip: 0.52 },
+      info: { emerge: 0.62, flip: 0.72 },
+      rsvp: { emerge: 0.82, flip: 0.92 },
     },
 
     // Envelope shadow removal threshold

@@ -65,7 +65,7 @@
   left: 0;
   width: 100%;
   height: 55%;
-  background: 
+  background:
     linear-gradient(to bottom right, transparent 49.5%, #a89352 50%) left,
     linear-gradient(to bottom left, transparent 49.5%, #a89352 50%) right;
   background-size: 50% 100%;
@@ -140,13 +140,15 @@
 .envelope-flap-back {
   position: absolute;
   width: 100%;
-  height: 30%;
-  bottom: 0;
-  /* Interior fosco do envelope - cor sólida sem sombra */
-  background: #d4d0b8;
-  /* INVERTIDO: ponta para cima, base para baixo */
+  height: 55%;
+  top: 0;
+  left: 0;
+  /* Interior fosco do envelope - tom mais escuro do envelope */
+  background: #8a7a4a;
+  /* Triângulo: ponta para cima, base embaixo */
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  transform: rotateX(180deg);
+  transform: rotateX(180deg) translateY(-98%);
+  transform-origin: top center;
   backface-visibility: hidden;
   box-shadow: none;
   /* Invisível inicialmente */
@@ -176,13 +178,11 @@
   width: 100%;
   height: 100%;
   /* Cor de cera autêntica - burgundy profundo */
-  background: radial-gradient(
-    ellipse 70% 70% at 35% 35%,
-    #9a2828 0%,
-    #6d1a1a 40%,
-    #4a1212 70%,
-    #3a0e0e 100%
-  );
+  background: radial-gradient(ellipse 70% 70% at 35% 35%,
+      #9a2828 0%,
+      #6d1a1a 40%,
+      #4a1212 70%,
+      #3a0e0e 100%);
   /* Borda irregular orgânica - não é um círculo perfeito */
   border-radius: 48% 52% 50% 50% / 51% 49% 51% 49%;
   box-shadow:
@@ -203,12 +203,10 @@
   left: 18%;
   width: 14px;
   height: 16px;
-  background: radial-gradient(
-    ellipse at 50% 30%,
-    #6d1a1a 0%,
-    #4a1212 60%,
-    #3a0e0e 100%
-  );
+  background: radial-gradient(ellipse at 50% 30%,
+      #6d1a1a 0%,
+      #4a1212 60%,
+      #3a0e0e 100%);
   border-radius: 45% 55% 55% 45% / 35% 35% 65% 65%;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 }
@@ -221,12 +219,10 @@
   right: 22%;
   width: 10px;
   height: 12px;
-  background: radial-gradient(
-    ellipse at 50% 30%,
-    #6d1a1a 0%,
-    #4a1212 60%,
-    #3a0e0e 100%
-  );
+  background: radial-gradient(ellipse at 50% 30%,
+      #6d1a1a 0%,
+      #4a1212 60%,
+      #3a0e0e 100%);
   border-radius: 50% 50% 55% 45% / 40% 40% 60% 60%;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 }
@@ -236,7 +232,7 @@
   font-size: 1.8rem;
   font-weight: 400;
   color: #d4b060;
-  text-shadow: 
+  text-shadow:
     1px 1px 1px rgba(0, 0, 0, 0.4),
     -0.5px -0.5px 0px rgba(255, 200, 200, 0.1);
   letter-spacing: 0.02em;

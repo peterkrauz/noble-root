@@ -125,7 +125,7 @@
 }
 
 .stacking-card.emerged.positioned[data-card-index="3"] {
-  transform: translate(calc(-50% + 25vw), calc(-50% + 28vh)) scale(0.65) rotate(1.5deg) !important;  /* RIGHT - lower */
+  transform: translate(calc(-50% + 8vw), calc(-50% + 28vh)) scale(0.65) rotate(0deg) !important;  /* CENTER - RSVP stays front and center */
 }
 
 /* ============================================

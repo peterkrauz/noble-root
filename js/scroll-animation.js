@@ -25,7 +25,7 @@
     // Envelope movement (moves to bottom as it opens)
     envelopeMoveStart: 0.08,     // When envelope starts moving down
     envelopeMoveEnd: 0.25,       // When envelope reaches final position
-    envelopeFinalY: 25,          // Final Y position (vh from center, 25 = 10% higher than before)
+    envelopeFinalY: 15,          // Final Y position (vh from center)
 
     // Stacking cards - emergence, flip, and position thresholds
     // Cards emerge, flip to show back, then move to their stacked position

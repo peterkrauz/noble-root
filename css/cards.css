@@ -6,7 +6,7 @@
 /* ---- STACKING CARDS CONTAINER ---- */
 .stacking-cards-container {
   position: fixed;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   /* No fixed dimensions - cards define their own size */
@@ -22,7 +22,7 @@
   top: 50%;
   left: 50%;
   /* Explicit width for aspect-ratio to work */
-  width: min(320px, 85vw);
+  width: min(380px, 85vw);
   transform-style: preserve-3d;
   /* Initial state: hidden below (at envelope position), scaled down */
   opacity: 0;
@@ -65,7 +65,7 @@
 .stacking-card[data-card-index="2"],
 .stacking-card[data-card-index="3"] {
   aspect-ratio: 1748 / 1306;
-  width: min(420px, 90vw);
+  width: min(500px, 90vw);
 }
 
 /* Card 5 (RSVP): Keep current portrait dimensions */
@@ -153,26 +153,32 @@
   transform: rotateY(180deg);
 }
 
-/* ---- POSITIONED STATE (Cards stacked/fanned in center) ---- */
-/* Layout: centered fan with rotation and scale variation */
+/* ---- POSITIONED STATE (Cards spread around viewport) ---- */
+/* Layout: Card 1 left, Card 2 top-left, Card 3 center, Card 4 top-right, Card 5 right */
+
+/* Card 1: CENTER TOP (above envelope) - main card */
 .stacking-card.emerged.positioned[data-card-index="0"] {
-  transform: translate(-50%, -50%) scale(0.85) rotate(-8deg) !important;
+  transform: translate(-50%, calc(-50% - 30vh)) scale(0.9) rotate(0deg) !important;
 }
 
+/* Card 2: TOP LEFT */
 .stacking-card.emerged.positioned[data-card-index="1"] {
-  transform: translate(-50%, -50%) scale(0.88) rotate(-4deg) !important;
+  transform: translate(calc(-50% - 20vw), calc(-50% - 25vh)) scale(0.8) rotate(2deg) !important;
 }
 
+/* Card 3: LEFT */
 .stacking-card.emerged.positioned[data-card-index="2"] {
-  transform: translate(-50%, -50%) scale(0.91) rotate(0deg) !important;
+  transform: translate(calc(-50% - 35vw), -50%) scale(0.85) rotate(-3deg) !important;
 }
 
+/* Card 4: TOP RIGHT */
 .stacking-card.emerged.positioned[data-card-index="3"] {
-  transform: translate(-50%, -50%) scale(0.94) rotate(4deg) !important;
+  transform: translate(calc(-50% + 20vw), calc(-50% - 25vh)) scale(0.8) rotate(-2deg) !important;
 }
 
+/* Card 5 (RSVP): RIGHT */
 .stacking-card.emerged.positioned[data-card-index="4"] {
-  transform: translate(-50%, -50%) scale(0.97) rotate(8deg) !important;
+  transform: translate(calc(-50% + 35vw), -50%) scale(0.85) rotate(3deg) !important;
 }
 
 /* ============================================
@@ -425,7 +431,7 @@
 
 @media (max-width: 768px) {
   .stacking-card {
-    width: min(300px, 90vw);
+    width: min(340px, 90vw);
   }
 
   .card-front-abertura .couple-names {

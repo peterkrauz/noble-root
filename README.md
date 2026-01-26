@@ -1,44 +1,6 @@
-# Wedding Website
-
-An elegant, scroll-driven wedding invitation website with an interactive envelope animation.
-
-## Features
-
-- **Scroll-driven envelope animation** - The envelope opens and cards emerge as you scroll
-- **Responsive design** - Works beautifully on desktop and mobile
-- **Easy customization** - Colors, names, dates, and content are easy to change
-- **No build tools** - Plain HTML, CSS, and JavaScript
-- **Google Forms RSVP** - Link directly to your RSVP form
-
-## Quick Start
-
-1. Open `index.html` in your browser to preview
-2. Edit the content (see Customization below)
-3. Deploy to any static hosting (GitHub Pages, Netlify, Vercel, etc.)
+# noble-root
 
 ## Customization
-
-### Changing Names, Dates & Details
-
-Open `index.html` and look for comments marked with `========== EDIT ... ==========`:
-
-```html
-<!-- ========== EDIT COUPLE'S LAST NAME HERE ========== -->
-<p class="names">the Smiths</p>
-
-<!-- ========== EDIT NAMES HERE ========== -->
-<span>Alice</span>
-<span class="ampersand">&</span>
-<span>Benjamin</span>
-
-<!-- ========== EDIT DATE/TIME/VENUE HERE ========== -->
-<p class="date-day">15</p>
-<p class="date-month">September</p>
-<p class="date-year">2026</p>
-
-<!-- ========== EDIT GOOGLE FORM LINK HERE ========== -->
-<a href="https://forms.google.com/your-form-link" ...>
-```
 
 ### Changing Colors
 

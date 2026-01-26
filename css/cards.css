@@ -244,27 +244,27 @@
   transform: rotateY(180deg);
 }
 
-/* ---- POSITIONED STATE (Cards spread around viewport) ---- */
-/* Layout: Card 1 left, Card 2 top-left, Card 3 center, Card 4 top-right, Card 5 right */
+/* ---- POSITIONED STATE (Cards spread like fingers on a hand) ---- */
+/* Layout from left to right: Card 2, Card 1, Book, RSVP */
 
-/* Card 1: CENTER TOP (above envelope) - main card */
-.stacking-card.emerged.positioned[data-card-index="0"] {
-  transform: translate(-50%, calc(-50% - 30vh)) scale(0.95) rotate(0deg) !important;
-}
-
-/* Card 2: TOP LEFT */
+/* Card 2: LEFTMOST */
 .stacking-card.emerged.positioned[data-card-index="1"] {
-  transform: translate(calc(-50% - 20vw), calc(-50% - 25vh)) scale(0.84) rotate(2deg) !important;
+  transform: translate(calc(-50% - 38vw), calc(-50% - 10vh)) scale(0.85) rotate(-8deg) !important;
 }
 
-/* Card 3: LEFT */
+/* Card 1: CENTER-LEFT */
+.stacking-card.emerged.positioned[data-card-index="0"] {
+  transform: translate(calc(-50% - 13vw), calc(-50% - 23vh)) scale(0.9) rotate(-3deg) !important;
+}
+
+/* Book Card: CENTER-RIGHT */
 .stacking-card.emerged.positioned[data-card-index="2"] {
-  transform: translate(calc(-50% - 35vw), -50%) scale(0.89) rotate(-3deg) !important;
+  transform: translate(calc(-50% + 13vw), calc(-50% - 17vh)) scale(0.85) rotate(3deg) !important;
 }
 
-/* Card 4 (RSVP): RIGHT */
+/* RSVP: RIGHTMOST */
 .stacking-card.emerged.positioned[data-card-index="3"] {
-  transform: translate(calc(-50% + 35vw), -50%) scale(0.89) rotate(3deg) !important;
+  transform: translate(calc(-50% + 38vw), calc(-50% - 10vh)) scale(0.85) rotate(8deg) !important;
 }
 
 /* ============================================

@@ -1,0 +1,67 @@
+/* ============================================
+   WEDDING WEBSITE - COLOR & FONT VARIABLES
+   ============================================
+   Carol & Peter's Wedding
+   Color palette from cores.png
+   ============================================ */
+
+:root {
+  /* ---- PRIMARY COLORS (Gold/Olive) ---- */
+  --color-gold: #dcc570;              /* Light gold - accents, highlights */
+  --color-gold-dark: #827546;         /* Dark olive - envelope, cards */
+  --color-gold-light: #e8d898;        /* Lighter gold for hover */
+  
+  /* ---- CREAM/NEUTRAL COLORS ---- */
+  --color-cream: #f7f5d1;             /* Light cream - main background */
+  --color-cream-dark: #d9d6b3;        /* Darker cream - card backgrounds */
+  --color-white: #fffef8;             /* Off-white for cards */
+  
+  /* ---- CORAL/ORANGE ACCENT ---- */
+  --color-coral: #fc4c29;             /* Bright coral - accent, buttons */
+  --color-coral-dark: #af2d1e;        /* Dark coral - hover states */
+  
+  /* ---- BURGUNDY/WINE COLORS ---- */
+  --color-burgundy: #821d1d;          /* Burgundy - primary accent, text */
+  --color-burgundy-dark: #4f1414;     /* Dark wine - dark backgrounds */
+  --color-burgundy-light: #9a2828;    /* Lighter burgundy */
+  
+  /* ---- LEGACY MAPPINGS (for compatibility) ---- */
+  --color-olive: var(--color-gold-dark);
+  --color-olive-dark: #6b5a3a;
+  --color-olive-light: var(--color-gold);
+  
+  /* ---- TEXT COLORS ---- */
+  --color-text-dark: #4f1414;         /* Dark wine for primary text */
+  --color-text-light: #f7f5d1;        /* Cream for text on dark backgrounds */
+  --color-text-muted: #827546;        /* Olive for secondary text */
+  
+  /* ---- SHADOWS ---- */
+  --shadow-soft: 0 4px 20px rgba(79, 20, 20, 0.1);
+  --shadow-medium: 0 8px 30px rgba(79, 20, 20, 0.15);
+  --shadow-strong: 0 12px 40px rgba(79, 20, 20, 0.2);
+  
+  /* ---- FONTS ---- */
+  --font-script: 'Reenie Beanie', cursive;      /* Handwritten script for names */
+  --font-sans: 'Lexend Giga', sans-serif;       /* Geometric sans for headings */
+  --font-serif: 'Playfair Display', serif;      /* Elegant serif for body */
+  
+  /* ---- SPACING ---- */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 6rem;
+  
+  /* ---- TRANSITIONS ---- */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s ease;
+  --transition-slow: 0.8s ease;
+  
+  /* ---- Z-INDEX LAYERS ---- */
+  --z-background: 1;
+  --z-envelope: 10;
+  --z-cards: 20;
+  --z-flap: 30;
+  --z-seal: 40;
+  --z-overlay: 100;
+}

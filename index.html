@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carol & Peter - Casamento</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@300;400;500;600&family=Reenie+Beanie&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css?v=14">
+  <link rel="stylesheet" href="css/base.css?v=14">
+  <link rel="stylesheet" href="css/envelope.css?v=21">
+  <link rel="stylesheet" href="css/cards.css?v=50">
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💒</text></svg>">
+</head>
+
+<body>
+  <!-- ============================================
+       SCROLL CONTAINER
+       ============================================ -->
+  <div class="scroll-container">
+
+    <!-- ============================================
+         STICKY WRAPPER
+         ============================================ -->
+    <div class="sticky-wrapper">
+
+      <!-- ============================================
+           INTRO TEXT
+           ============================================ -->
+      <div class="intro-text" id="introText">
+        <p class="introducing">Apresentamos</p>
+        <p class="names">Carol & Peter</p>
+      </div>
+
+      <!-- ============================================
+           ENVELOPE SCENE
+           ============================================ -->
+      <div class="envelope-scene">
+
+        <!-- Decorações Florais -->
+        <div class="floral-decoration floral-left" id="floralLeft">
+          <img src="elements/buque-oliva.png" alt="Decoração floral" class="floral-img">
+        </div>
+        <div class="floral-decoration floral-right" id="floralRight">
+          <img src="elements/buque-oliva.png" alt="Decoração floral" class="floral-img floral-img-flip">
+        </div>
+
+        <!-- Envelope -->
+        <div class="envelope">
+
+          <!-- Corpo do Envelope -->
+          <div class="envelope-body">
+            <!-- Interior do Envelope (vincos decorativos) -->
+            <div class="envelope-interior"></div>
+            <!-- Forro do Envelope -->
+            <div class="envelope-liner" id="envelopeLiner">
+
+            </div>
+          </div>
+
+          <!-- Aba do Envelope -->
+          <div class="envelope-flap" id="envelopeFlap">
+            <div class="envelope-flap-front"></div>
+            <div class="envelope-flap-back"></div>
+          </div>
+
+          <!-- Selo de Cera -->
+          <div class="wax-seal" id="waxSeal">
+            <div class="wax-seal-circle">
+              <span class="wax-seal-initials">C&P</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ============================================
+             CONTAINER DOS CARTÕES - STACKING FLIP CARDS
+             ============================================ -->
+        <div class="stacking-cards-container" id="stackingCards">
+
+          <!-- Card 1 -->
+          <div class="stacking-card" id="card1" data-card-index="0">
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <img src="elements/cards/card_1_frente.png" alt="Card 1 Front">
+              </div>
+              <div class="card-face card-back">
+                <img src="elements/cards/card_1_verso.png" alt="Card 1 Back">
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="stacking-card" id="card2" data-card-index="1">
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <img src="elements/cards/card_2_frente.png" alt="Card 2 Front">
+              </div>
+              <div class="card-face card-back">
+                <img src="elements/cards/card_2_verso.png" alt="Card 2 Back">
+              </div>
+            </div>
+          </div>
+
+          <!-- Book Card (replaces cards 3 & 4) -->
+          <div class="stacking-card book-card" id="cardBook" data-card-index="2">
+            <div class="card-inner">
+              <!-- The spread (visible when open) -->
+              <div class="book-spread">
+                <div class="book-page book-page-left">
+                  <img src="elements/cards/card_3_verso.png" alt="Left page">
+                </div>
+                <div class="book-page book-page-right">
+                  <img src="elements/cards/card_3_frente.png" alt="Right page">
+                </div>
+              </div>
+
+              <!-- Front cover - folds open to the left -->
+              <div class="book-cover book-cover-front">
+                <img src="elements/cards/card_4_frente.png" alt="Front cover">
+              </div>
+
+              <!-- Back cover - folds closed from the left -->
+              <div class="book-cover book-cover-back">
+                <img src="elements/cards/card_4_verso.png" alt="Back cover">
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: RSVP -->
+          <div class="stacking-card" id="cardRsvp" data-card-index="3">
+            <div class="card-inner">
+              <div class="card-face card-front card-front-rsvp">
+                <div class="rsvp-seal"><span>C&P</span></div>
+                <p class="card-title">Confirme sua Presença</p>
+                <a href="https://forms.google.com/your-form-link" target="_blank" rel="noopener"
+                  class="rsvp-button">Responder</a>
+              </div>
+              <div class="card-face card-back card-back-rsvp">
+                <p class="back-title">Prazo</p>
+                <p class="back-deadline">Até 30 de Abril</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Dica de Rolagem -->
+      <div class="scroll-hint" id="scrollHint">
+        <p>Vai Tomando...</p>
+        <span class="arrow">↓</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ============================================
+       SEÇÃO DE DETALHES
+       ============================================ -->
+  <section class="details-section" id="details">
+
+
+    <div class="details-content">
+      <h2>Detalhes do Casamento</h2>
+      <div class="details-grid">
+        <div class="detail-item">
+          <h3>Recepção</h3>
+          <p>14h30</p>
+          <p>Chegada dos Convidados</p>
+        </div>
+        <div class="detail-item">
+          <h3>Cerimônia</h3>
+          <p>15h</p>
+          <p>Cerimônia de Casamento</p>
+        </div>
+        <div class="detail-item">
+          <h3>Local</h3>
+          <p>Casa Maciço</p>
+          <p class="address-small">R. Rosa, 1998</p>
+          <p class="address-small">Pantanal, Florianópolis - SC</p>
+          <p class="address-small">88040-270</p>
+        </div>
+        <div class="detail-item">
+          <h3>Traje</h3>
+          <p>Traje Social</p>
+        </div>
+      </div>
+
+      <div class="details-illustration">
+        <img src="elements/casal-vinho.png" alt="Casal celebrando" class="details-couple-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SEÇÃO DE CORES E INSPIRAÇÃO
+       ============================================ -->
+  <section class="colors-section" id="colorsInspo" style="background:#4f1414;padding:4rem 2rem;">
+    <div class="colors-content" style="max-width:800px;margin:0 auto;text-align:center;">
+      <h2 style="font-family:'Reenie Beanie',cursive;font-size:3rem;color:#dcc570;margin-bottom:0.5rem;">Cores &
+        Inspiração</h2>
+      <p class="colors-subtitle"
+        style="font-family:'Playfair Display',serif;font-size:0.9rem;color:#f7f5d1;opacity:0.8;margin-bottom:2rem;">
+        Nossa paleta de cores e inspirações de looks</p>
+
+      <div class="color-palette"
+        style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;">
+        <div class="color-swatch swatch-gold"
+          style="width:60px;height:60px;border-radius:50%;background:#dcc570;box-shadow:0 3px 10px rgba(0,0,0,0.3);">
+        </div>
+        <div class="color-swatch swatch-cream"
+          style="width:60px;height:60px;border-radius:50%;background:#f7f5d1;box-shadow:0 3px 10px rgba(0,0,0,0.3);">
+        </div>
+        <div class="color-swatch swatch-coral"
+          style="width:60px;height:60px;border-radius:50%;background:#fc4c29;box-shadow:0 3px 10px rgba(0,0,0,0.3);">
+        </div>
+        <div class="color-swatch swatch-burgundy"
+          style="width:60px;height:60px;border-radius:50%;background:#821d1d;box-shadow:0 3px 10px rgba(0,0,0,0.3);">
+        </div>
+        <div class="color-swatch swatch-olive"
+          style="width:60px;height:60px;border-radius:50%;background:#827546;box-shadow:0 3px 10px rgba(0,0,0,0.3);">
+        </div>
+      </div>
+
+      <div class="inspo-links" style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;">
+        <a href="https://pinterest.com/search/pins/?q=wedding%20guest%20outfit%20women" target="_blank" rel="noopener"
+          class="inspo-link"
+          style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:rgba(255,255,255,0.08);border:1px solid #dcc570;border-radius:25px;color:#f7f5d1;font-family:'Lexend Giga',sans-serif;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;">
+          <span class="inspo-icon">📌</span>
+          <span>Inspirações Femininas</span>
+        </a>
+        <a href="https://pinterest.com/search/pins/?q=wedding%20guest%20outfit%20men" target="_blank" rel="noopener"
+          class="inspo-link"
+          style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:rgba(255,255,255,0.08);border:1px solid #dcc570;border-radius:25px;color:#f7f5d1;font-family:'Lexend Giga',sans-serif;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;">
+          <span class="inspo-icon">📌</span>
+          <span>Inspirações Masculinas</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SEÇÃO DE PRESENTES
+       ============================================ -->
+  <section class="gifts-section" id="presentes" style="background:#f7f5d1;padding:6rem 2rem;">
+    <div class="gifts-content" style="max-width:650px;margin:0 auto;text-align:center;">
+      <h2 style="font-family:'Reenie Beanie',cursive;font-size:4rem;color:#821d1d;margin-bottom:1rem;">Presentes</h2>
+      <p class="gifts-intro"
+        style="font-family:'Playfair Display',serif;font-size:1rem;color:#4f1414;line-height:1.7;margin-bottom:4rem;">
+        Sua presença é o nosso maior presente! Mas se deseja nos presentear,
+        o dinheiro será usado da seguinte forma:
+      </p>
+
+      <div class="pix-box"
+        style="background:linear-gradient(135deg,rgba(220,197,112,0.15) 0%,rgba(130,117,70,0.08) 100%);border:2px solid #dcc570;border-radius:12px;padding:2rem;margin-bottom:4rem;">
+        <h3
+          style="font-family:'Lexend Giga',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#fc4c29;margin-bottom:1rem;">
+          Chave Pix</h3>
+        <p class="pix-key"
+          style="font-family:'Lexend Giga',sans-serif;font-size:1rem;font-weight:500;color:#821d1d;background:#fffef8;padding:0.6rem 1.2rem;border-radius:6px;display:inline-block;margin-bottom:0.4rem;">
+          email@exemplo.com</p>
+        <p class="pix-name" style="font-family:'Reenie Beanie',cursive;font-size:1.4rem;color:#4f1414;">Carol & Peter
+        </p>
+      </div>
+
+      <div class="gifts-split" style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-bottom:4rem;">
+        <div class="gift-item"
+          style="flex:1;min-width:220px;max-width:280px;padding:2rem;background:#fffef8;border-radius:12px;box-shadow:0 4px 20px rgba(79,20,20,0.1);">
+          <span class="gift-icon" style="font-size:2rem;display:block;margin-bottom:1rem;">✈️</span>
+          <h4 style="font-family:'Reenie Beanie',cursive;font-size:1.8rem;color:#821d1d;margin-bottom:0.5rem;">Lua de
+            Mel</h4>
+          <p style="font-family:'Playfair Display',serif;font-size:0.95rem;color:#827546;line-height:1.5;">50% do valor
+            será destinado à nossa viagem de lua de mel</p>
+        </div>
+        <div class="gift-item"
+          style="flex:1;min-width:220px;max-width:280px;padding:2rem;background:#fffef8;border-radius:12px;box-shadow:0 4px 20px rgba(79,20,20,0.1);">
+          <span class="gift-icon" style="font-size:2rem;display:block;margin-bottom:1rem;">🐾</span>
+          <h4 style="font-family:'Reenie Beanie',cursive;font-size:1.8rem;color:#821d1d;margin-bottom:0.5rem;">Protetor
+            Paulo</h4>
+          <p style="font-family:'Playfair Display',serif;font-size:0.95rem;color:#827546;line-height:1.5;">50% do valor
+            será doado ao Protetor Paulo, cuidador animal</p>
+        </div>
+      </div>
+
+      <p class="gifts-thanks" style="font-family:'Reenie Beanie',cursive;font-size:1.4rem;color:#827546;">Obrigado por
+        fazer parte deste momento especial!</p>
+    </div>
+  </section>
+
+  <!-- ============================================
+       RODAPÉ
+       ============================================ -->
+  <footer class="site-footer" id="siteFooter">
+    <div class="footer-content">
+      <h2 class="footer-names">Carol & Peter</h2>
+      <h3 class="footer-date">30 de Maio de 2026</h3>
+    </div>
+  </footer>
+
+  <!-- Script de Animação -->
+  <script src="js/scroll-animation.js?v=6"></script>
+</body>
+
+</html>

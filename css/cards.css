@@ -1,0 +1,544 @@
+/* ============================================
+   STACKING FLIP CARDS - Wedding Info Cards
+   Carol & Peter's Wedding
+   ============================================ */
+
+/* ---- STACKING CARDS CONTAINER ---- */
+.stacking-cards-container {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* No fixed dimensions - cards define their own size */
+  perspective: 1500px;
+  pointer-events: none;
+  z-index: var(--z-cards);
+}
+
+/* ---- BASE STACKING CARD ---- */
+.stacking-card {
+  position: absolute;
+  /* Center cards in container */
+  top: 50%;
+  left: 50%;
+  /* Explicit width for aspect-ratio to work */
+  width: min(400px, 85vw);
+  transform-style: preserve-3d;
+  /* Initial state: hidden below (at envelope position), scaled down */
+  opacity: 0;
+  transform: translate(-50%, -50%) translateY(350px) scale(0.7);
+  pointer-events: none;
+  /* Smooth emergence animation with slight bounce */
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.4s ease;
+}
+
+/* Card z-index based on index (later cards on top) */
+.stacking-card[data-card-index="0"] {
+  z-index: 1;
+}
+
+.stacking-card[data-card-index="1"] {
+  z-index: 2;
+}
+
+.stacking-card[data-card-index="2"] {
+  z-index: 3;
+}
+
+.stacking-card[data-card-index="3"] {
+  z-index: 4;
+}
+
+/* ---- CARD ASPECT RATIOS (based on PNG dimensions) ---- */
+/* Cards 1 & 2: Portrait (1748 x 2481) */
+.stacking-card[data-card-index="0"],
+.stacking-card[data-card-index="1"] {
+  aspect-ratio: 1748 / 2481;
+}
+
+/* Card 4 (RSVP): Keep current portrait dimensions */
+.stacking-card[data-card-index="3"] {
+  aspect-ratio: 320 / 420;
+}
+
+/* ---- CARD INNER (Flip Container) ---- */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---- CARD FACES ---- */
+.card-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(79, 20, 20, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--spacing-lg);
+  overflow: hidden;
+}
+
+/* ---- IMAGE CARD STYLING ---- */
+.card-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+/* Image cards: remove box-shadow from face, let image define appearance */
+.card-face:has(img) {
+  padding: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* Back face is rotated 180deg */
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* ============================================
+   BOOK CARD - Horizontal Opening Animation
+   ============================================ */
+
+/* Book card container - uses landscape aspect ratio when closed */
+.book-card {
+  width: min(525px, 90vw) !important;
+  aspect-ratio: 1748 / 1306 !important;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.4s ease,
+              width 0.8s ease-in-out,
+              aspect-ratio 0.8s ease-in-out;
+}
+
+/* When book is open, double the width for the spread */
+.book-card.book-open {
+  width: min(1050px, 95vw) !important;
+  aspect-ratio: 3496 / 1306 !important;
+}
+
+/* Book card inner needs 3D for cover folding */
+.book-card .card-inner {
+  transform-style: preserve-3d;
+  perspective: 1500px;
+}
+
+/* The spread (inside pages) - always present, covered when closed */
+.book-spread {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.book-page {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Book covers */
+.book-cover {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Front cover - covers the spread initially, folds to the left */
+.book-cover-front {
+  z-index: 3;
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  transition: transform 0.8s ease-in-out, z-index 0s 0.4s;
+}
+
+.book-card.book-open .book-cover-front,
+.book-card.book-closed-back .book-cover-front {
+  transform: rotateY(-180deg);
+  z-index: 1;
+}
+
+/* Back cover - starts folded away, folds in to show back */
+.book-cover-back {
+  z-index: 2;
+  transform-origin: right center;
+  transform: rotateY(180deg);
+  transition: transform 0.8s ease-in-out, z-index 0s 0.4s;
+}
+
+.book-card.book-closed-back .book-cover-back {
+  transform: rotateY(0deg);
+  z-index: 4;
+}
+
+/* Spread visibility */
+.book-spread {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.book-card.book-open .book-spread {
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out 0.2s;
+}
+
+/* ---- EMERGED STATE (Card visible) ---- */
+.stacking-card.emerged {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Stacking offset - each emerged card slightly offset with rotation for natural paper look */
+.stacking-card.emerged[data-card-index="0"] {
+  transform: translate(-50%, -50%) translateY(-10px) scale(1) rotate(-1.5deg);
+}
+
+.stacking-card.emerged[data-card-index="1"] {
+  transform: translate(-50%, -50%) translateY(-5px) scale(0.98) rotate(1deg);
+}
+
+.stacking-card.emerged[data-card-index="2"] {
+  transform: translate(-50%, -50%) translateY(0px) scale(0.96) rotate(-0.5deg);
+}
+
+.stacking-card.emerged[data-card-index="3"] {
+  transform: translate(-50%, -50%) translateY(5px) scale(0.94) rotate(1.2deg);
+}
+
+/* ---- FLIPPED STATE ---- */
+.stacking-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* ---- POSITIONED STATE (Cards spread like fingers on a hand) ---- */
+/* Layout from left to right: Card 2, Card 1, Book, RSVP */
+
+/* Card 2: LEFTMOST */
+.stacking-card.emerged.positioned[data-card-index="1"] {
+  transform: translate(calc(-50% - 38vw), calc(-50% - 10vh)) scale(0.85) rotate(-8deg) !important;
+}
+
+/* Card 1: CENTER-LEFT */
+.stacking-card.emerged.positioned[data-card-index="0"] {
+  transform: translate(calc(-50% - 13vw), calc(-50% - 23vh)) scale(0.9) rotate(-3deg) !important;
+}
+
+/* Book Card: CENTER-RIGHT */
+.stacking-card.emerged.positioned[data-card-index="2"] {
+  transform: translate(calc(-50% + 13vw), calc(-50% - 17vh)) scale(0.85) rotate(3deg) !important;
+}
+
+/* RSVP: RIGHTMOST */
+.stacking-card.emerged.positioned[data-card-index="3"] {
+  transform: translate(calc(-50% + 38vw), calc(-50% - 10vh)) scale(0.85) rotate(8deg) !important;
+}
+
+/* ============================================
+   CARD FRONT STYLES - Individual Card Designs
+   ============================================ */
+
+/* ---- ABERTURA CARD (Gold Gradient) ---- */
+.card-front-abertura {
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+  color: var(--color-burgundy-dark);
+}
+
+.card-front-abertura .card-label {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-front-abertura .couple-names {
+  font-family: var(--font-script);
+  font-size: clamp(2.8rem, 8vw, 4rem);
+  line-height: 1.1;
+}
+
+.card-front-abertura .ampersand {
+  display: block;
+  font-size: 2.2rem;
+  margin: 0.2rem 0;
+  font-family: var(--font-script);
+}
+
+/* Decorative dots */
+.card-front-abertura::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 6px;
+  height: 6px;
+  background: var(--color-cream);
+  border-radius: 50%;
+  opacity: 0.5;
+  box-shadow:
+    -12px 0 0 var(--color-cream),
+    -24px 0 0 var(--color-cream),
+    0 12px 0 var(--color-cream),
+    -12px 12px 0 var(--color-cream);
+}
+
+/* ---- ABERTURA BACK ---- */
+.card-back-abertura {
+  background: var(--color-cream);
+  color: var(--color-burgundy-dark);
+  border: 3px solid var(--color-burgundy);
+}
+
+.card-back-abertura .back-title {
+  font-family: var(--font-script);
+  font-size: 2rem;
+  color: var(--color-burgundy);
+  margin-bottom: var(--spacing-md);
+}
+
+.card-back-abertura .back-time {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--color-gold-dark);
+  margin: 0.5rem 0;
+}
+
+/* ---- LOCAL CARD ---- */
+.card-front-local {
+  background: var(--color-cream);
+  color: var(--color-burgundy-dark);
+  border: 3px solid var(--color-gold);
+}
+
+.card-front-local .card-title {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-front-local .card-venue {
+  font-family: var(--font-script);
+  font-size: 2.5rem;
+  color: var(--color-burgundy);
+  margin-bottom: 0.5rem;
+}
+
+.card-front-local .card-address {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-gold-dark);
+}
+
+/* ---- LOCAL BACK ---- */
+.card-back-local {
+  background: var(--color-burgundy-dark);
+  color: var(--color-cream);
+}
+
+.card-back-local .back-title {
+  font-family: var(--font-script);
+  font-size: 1.8rem;
+  color: var(--color-gold);
+  margin-bottom: var(--spacing-md);
+}
+
+.card-back-local .back-placeholder {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--color-cream);
+  opacity: 0.7;
+}
+
+/* ---- INFO CARD ---- */
+.card-front-info {
+  background: linear-gradient(135deg, var(--color-burgundy) 0%, var(--color-burgundy-dark) 100%);
+  color: var(--color-cream);
+}
+
+.card-front-info .card-title {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-front-info .card-dresscode {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: var(--color-cream);
+}
+
+/* ---- INFO BACK ---- */
+.card-back-info {
+  background: var(--color-cream);
+  color: var(--color-burgundy-dark);
+  border: 3px solid var(--color-burgundy);
+}
+
+.card-back-info .back-title {
+  font-family: var(--font-script);
+  font-size: 1.8rem;
+  color: var(--color-burgundy);
+  margin-bottom: var(--spacing-md);
+}
+
+.card-back-info .back-placeholder {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--color-gold-dark);
+  opacity: 0.7;
+}
+
+/* ---- RSVP CARD ---- */
+.card-front-rsvp {
+  background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-cream-dark) 100%);
+  color: var(--color-burgundy-dark);
+  border: 3px solid var(--color-coral);
+}
+
+.card-front-rsvp .rsvp-seal {
+  width: 60px;
+  height: 60px;
+  margin-bottom: var(--spacing-md);
+  background: radial-gradient(circle at 30% 30%,
+      var(--color-coral) 0%,
+      var(--color-burgundy) 50%,
+      var(--color-burgundy-dark) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-front-rsvp .rsvp-seal span {
+  font-family: var(--font-script);
+  font-size: 1.4rem;
+  color: var(--color-gold);
+}
+
+.card-front-rsvp .card-title {
+  font-family: var(--font-script);
+  font-size: 1.6rem;
+  color: var(--color-burgundy);
+  margin-bottom: var(--spacing-md);
+}
+
+.card-front-rsvp .rsvp-button {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: linear-gradient(135deg, var(--color-coral) 0%, var(--color-coral-dark) 100%);
+  color: var(--color-text-light);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  pointer-events: auto;
+}
+
+.card-front-rsvp .rsvp-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(252, 76, 41, 0.4);
+}
+
+/* ---- RSVP BACK ---- */
+.card-back-rsvp {
+  background: var(--color-coral);
+  color: var(--color-cream);
+}
+
+.card-back-rsvp .back-title {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+  opacity: 0.8;
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-back-rsvp .back-deadline {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: var(--color-cream);
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .stacking-card {
+    width: min(360px, 90vw);
+  }
+
+  .card-front-abertura .couple-names {
+    font-size: clamp(2.2rem, 7vw, 3rem);
+  }
+
+  .card-front-local .card-venue {
+    font-size: 2rem;
+  }
+
+  .card-front-info .card-dresscode {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stacking-card {
+    width: 90vw;
+  }
+
+  .card-face {
+    padding: var(--spacing-md);
+  }
+}

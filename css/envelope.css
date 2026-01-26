@@ -1,0 +1,297 @@
+/* ============================================
+   ENVELOPE STYLES - 3D Transforms & Animation
+   Carol & Peter's Wedding
+   ============================================ */
+
+/* ---- ENVELOPE CONTAINER ---- */
+.envelope-scene {
+  perspective: 1500px;
+  perspective-origin: 50% 50%;
+  position: relative;
+  width: min(480px, 90vw);
+  height: min(340px, 65vw);
+  transition: transform 0.1s linear;
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+/* ---- ENVELOPE BODY ---- */
+.envelope-body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* Matte/Fosco - cores sólidas sem brilho */
+  background: #b5a164;
+  border-radius: 4px;
+  box-shadow: var(--shadow-medium);
+  z-index: var(--z-envelope);
+  overflow: hidden;
+  transition: box-shadow 0.6s ease;
+}
+
+/* Estado aberto - remove TODA sombra para conexão limpa com a aba */
+.envelope-body.opened {
+  box-shadow: none;
+}
+
+
+/* Envelope texture overlay - textura de papel fosco */
+.envelope-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23paper)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* ---- ENVELOPE INTERIOR (Decorative folds) ---- */
+.envelope-interior {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Triangulo inferior (V shape pointing up) */
+.envelope-interior::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  background:
+    linear-gradient(to bottom right, transparent 49.5%, #a89352 50%) left,
+    linear-gradient(to bottom left, transparent 49.5%, #a89352 50%) right;
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+  opacity: 0.25;
+}
+
+/* ---- ENVELOPE LINER (Inside) ---- */
+.envelope-liner {
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  height: 85%;
+
+  border-radius: 2px 2px 0 0;
+  z-index: calc(var(--z-envelope) - 1);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Liner image */
+.envelope-liner .liner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: center;
+  object-position: 0px 30px;
+}
+
+.envelope-liner.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- ENVELOPE FLAP ---- */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  z-index: var(--z-flap);
+  /* Initial state: closed */
+  transform: rotateX(0deg);
+  transition: transform 0.1s linear, z-index 0.3s ease;
+  /* Sem sombra na aba */
+  box-shadow: none;
+}
+
+/* Quando aberta, a aba vai para trás do envelope */
+.envelope-flap.behind {
+  z-index: calc(var(--z-envelope) - 1);
+}
+
+.envelope-flap-front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* Matte/Fosco - cor sólida */
+  background: #a89352;
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  backface-visibility: hidden;
+}
+
+.envelope-flap-back {
+  position: absolute;
+  width: 100%;
+  height: 55%;
+  top: 0;
+  left: 0;
+  /* Interior fosco do envelope - tom mais escuro do envelope */
+  background: #8a7a4a;
+  /* Triângulo: ponta para cima, base embaixo */
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  transform: rotateX(180deg) translateY(-98%);
+  transform-origin: top center;
+  backface-visibility: hidden;
+  box-shadow: none;
+  /* Invisível inicialmente */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Flap-back visível quando envelope abre */
+.envelope-flap-back.visible {
+  opacity: 1;
+}
+
+/* ---- WAX SEAL - Estilo autêntico ---- */
+.wax-seal {
+  position: absolute;
+  bottom: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75px;
+  height: 75px;
+  z-index: var(--z-seal);
+  transition: transform var(--transition-medium), opacity var(--transition-medium);
+}
+
+.wax-seal-circle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* Cor de cera autêntica - burgundy profundo */
+  background: radial-gradient(ellipse 70% 70% at 35% 35%,
+      #9a2828 0%,
+      #6d1a1a 40%,
+      #4a1212 70%,
+      #3a0e0e 100%);
+  /* Borda irregular orgânica - não é um círculo perfeito */
+  border-radius: 48% 52% 50% 50% / 51% 49% 51% 49%;
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.4),
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    inset 1px 2px 4px rgba(255, 180, 180, 0.1),
+    inset -1px -1px 3px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.wax-seal-initials {
+  font-family: var(--font-script);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #d4b060;
+  text-shadow:
+    1px 1px 1px rgba(0, 0, 0, 0.4),
+    -0.5px -0.5px 0px rgba(255, 200, 200, 0.1);
+  letter-spacing: 0.02em;
+  /* Efeito de relevo/embossed */
+  position: relative;
+  z-index: 1;
+}
+
+/* Selo quebra quando envelope abre */
+.wax-seal.broken {
+  transform: translateX(-50%) scale(0.85) rotate(-8deg);
+  opacity: 0;
+}
+
+/* ---- FLORAL DECORATIONS ---- */
+.floral-decoration {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.floral-left {
+  left: -80px;
+  bottom: -40px;
+  width: 150px;
+  height: 180px;
+  transform: rotate(-15deg) translateY(20px);
+}
+
+.floral-right {
+  right: -80px;
+  bottom: -40px;
+  width: 150px;
+  height: 180px;
+  transform: rotate(15deg) translateY(20px);
+}
+
+.floral-decoration.visible {
+  opacity: 1;
+}
+
+.floral-left.visible {
+  transform: rotate(-15deg) translateY(0);
+}
+
+.floral-right.visible {
+  transform: rotate(15deg) translateY(0);
+}
+
+/* Floral images */
+.floral-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.floral-img-flip {
+  transform: scaleX(-1);
+}
+
+/* ---- INTRO TEXT ---- */
+.intro-text {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity var(--transition-medium);
+}
+
+.intro-text.hidden {
+  opacity: 0;
+}
+
+.intro-text .introducing {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  margin-bottom: 0.5rem;
+}
+
+.intro-text .names {
+  font-family: var(--font-script);
+  font-size: 3rem;
+  color: var(--color-burgundy);
+}

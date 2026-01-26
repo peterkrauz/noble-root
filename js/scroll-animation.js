@@ -28,13 +28,13 @@
     envelopeFinalY: 15,          // Final Y position (vh from center)
 
     // Stacking cards - emergence, flip, and position thresholds
-    // Cards emerge, flip to show back, then move to their stacked position
+    // Cards emerge, flip to show back, then move to their positioned state
+    // Book card has special states: emerge, open, closeBack, position
     // All animations complete by 70%, leaving 30% buffer before details section
     stackingCards: {
       card1: { emerge: 0.12, flip: 0.18, position: 0.22 },
       card2: { emerge: 0.24, flip: 0.30, position: 0.34 },
-      card3: { emerge: 0.36, flip: 0.42, position: 0.46 },
-      card4: { emerge: 0.48, flip: 0.54, position: 0.58 },
+      book:  { emerge: 0.36, open: 0.42, closeBack: 0.52, position: 0.58 },
       rsvp:  { emerge: 0.60, flip: 0.66, position: 0.70 },
     },
 
@@ -64,8 +64,7 @@
     stackingCardsContainer: document.getElementById('stackingCards'),
     card1: document.getElementById('card1'),
     card2: document.getElementById('card2'),
-    card3: document.getElementById('card3'),
-    card4: document.getElementById('card4'),
+    cardBook: document.getElementById('cardBook'),
     cardRsvp: document.getElementById('cardRsvp'),
     siteFooter: document.getElementById('siteFooter'),
   };
@@ -278,13 +277,63 @@
   }
 
   /**
+   * Animate the book card (special horizontal opening animation)
+   */
+  function animateBookCard(card, progress, cardConfig) {
+    if (!card) return;
+
+    const { emerge, open, closeBack, position } = cardConfig;
+
+    // Check if card should emerge
+    if (progress >= emerge) {
+      if (!card.classList.contains('emerged')) {
+        console.log(`[${card.id}] EMERGED at progress ${(progress * 100).toFixed(1)}%`);
+      }
+      card.classList.add('emerged');
+    } else {
+      card.classList.remove('emerged');
+    }
+
+    // Check if book should open (show spread)
+    if (progress >= open && progress < closeBack) {
+      if (!card.classList.contains('book-open')) {
+        console.log(`[${card.id}] BOOK OPENED at progress ${(progress * 100).toFixed(1)}%`);
+      }
+      card.classList.add('book-open');
+      card.classList.remove('book-closed-back');
+    } else {
+      card.classList.remove('book-open');
+    }
+
+    // Check if book should close to show back cover
+    if (progress >= closeBack) {
+      if (!card.classList.contains('book-closed-back')) {
+        console.log(`[${card.id}] BOOK CLOSED (back) at progress ${(progress * 100).toFixed(1)}%`);
+      }
+      card.classList.add('book-closed-back');
+    } else if (progress < open) {
+      // Before opening, ensure back cover is hidden
+      card.classList.remove('book-closed-back');
+    }
+
+    // Check if card should move to its final position
+    if (progress >= position) {
+      if (!card.classList.contains('positioned')) {
+        console.log(`[${card.id}] POSITIONED at progress ${(progress * 100).toFixed(1)}%`);
+      }
+      card.classList.add('positioned');
+    } else {
+      card.classList.remove('positioned');
+    }
+  }
+
+  /**
    * Animate all stacking cards
    */
   function animateStackingCards(progress) {
     animateStackingCard(elements.card1, progress, CONFIG.stackingCards.card1);
     animateStackingCard(elements.card2, progress, CONFIG.stackingCards.card2);
-    animateStackingCard(elements.card3, progress, CONFIG.stackingCards.card3);
-    animateStackingCard(elements.card4, progress, CONFIG.stackingCards.card4);
+    animateBookCard(elements.cardBook, progress, CONFIG.stackingCards.book);
     animateStackingCard(elements.cardRsvp, progress, CONFIG.stackingCards.rsvp);
   }
 
@@ -335,19 +384,17 @@
   function init() {
     // Log config for debugging
     console.log('=== WEDDING SCROLL ANIMATION DEBUG ===');
-    console.log('Card thresholds (emerge / flip / position):');
+    console.log('Card thresholds (emerge / flip or open / position):');
     console.log(`  Card 1: ${CONFIG.stackingCards.card1.emerge} / ${CONFIG.stackingCards.card1.flip} / ${CONFIG.stackingCards.card1.position}`);
     console.log(`  Card 2: ${CONFIG.stackingCards.card2.emerge} / ${CONFIG.stackingCards.card2.flip} / ${CONFIG.stackingCards.card2.position}`);
-    console.log(`  Card 3: ${CONFIG.stackingCards.card3.emerge} / ${CONFIG.stackingCards.card3.flip} / ${CONFIG.stackingCards.card3.position}`);
-    console.log(`  Card 4: ${CONFIG.stackingCards.card4.emerge} / ${CONFIG.stackingCards.card4.flip} / ${CONFIG.stackingCards.card4.position}`);
+    console.log(`  Book:   ${CONFIG.stackingCards.book.emerge} / ${CONFIG.stackingCards.book.open} / ${CONFIG.stackingCards.book.closeBack} / ${CONFIG.stackingCards.book.position}`);
     console.log(`  RSVP:   ${CONFIG.stackingCards.rsvp.emerge} / ${CONFIG.stackingCards.rsvp.flip} / ${CONFIG.stackingCards.rsvp.position}`);
 
     // Log card elements found
     console.log('Card elements found:');
     console.log(`  card1: ${elements.card1 ? 'YES' : 'NO'}`);
     console.log(`  card2: ${elements.card2 ? 'YES' : 'NO'}`);
-    console.log(`  card3: ${elements.card3 ? 'YES' : 'NO'}`);
-    console.log(`  card4: ${elements.card4 ? 'YES' : 'NO'}`);
+    console.log(`  cardBook: ${elements.cardBook ? 'YES' : 'NO'}`);
     console.log(`  cardRsvp: ${elements.cardRsvp ? 'YES' : 'NO'}`);
     console.log('=======================================');
 

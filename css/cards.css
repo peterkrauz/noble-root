@@ -22,7 +22,7 @@
   top: 50%;
   left: 50%;
   /* Explicit width for aspect-ratio to work */
-  width: min(380px, 85vw);
+  width: min(400px, 85vw);
   transform-style: preserve-3d;
   /* Initial state: hidden below (at envelope position), scaled down */
   opacity: 0;
@@ -50,10 +50,6 @@
   z-index: 4;
 }
 
-.stacking-card[data-card-index="4"] {
-  z-index: 5;
-}
-
 /* ---- CARD ASPECT RATIOS (based on PNG dimensions) ---- */
 /* Cards 1 & 2: Portrait (1748 x 2481) */
 .stacking-card[data-card-index="0"],
@@ -61,15 +57,8 @@
   aspect-ratio: 1748 / 2481;
 }
 
-/* Cards 3 & 4: Landscape (1748 x 1306) */
-.stacking-card[data-card-index="2"],
+/* Card 4 (RSVP): Keep current portrait dimensions */
 .stacking-card[data-card-index="3"] {
-  aspect-ratio: 1748 / 1306;
-  width: min(500px, 90vw);
-}
-
-/* Card 5 (RSVP): Keep current portrait dimensions */
-.stacking-card[data-card-index="4"] {
   aspect-ratio: 320 / 420;
 }
 
@@ -121,6 +110,112 @@
   transform: rotateY(180deg);
 }
 
+/* ============================================
+   BOOK CARD - Horizontal Opening Animation
+   ============================================ */
+
+/* Book card container - uses landscape aspect ratio when closed */
+.book-card {
+  width: min(525px, 90vw) !important;
+  aspect-ratio: 1748 / 1306 !important;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.4s ease,
+              width 0.8s ease-in-out,
+              aspect-ratio 0.8s ease-in-out;
+}
+
+/* When book is open, double the width for the spread */
+.book-card.book-open {
+  width: min(1050px, 95vw) !important;
+  aspect-ratio: 3496 / 1306 !important;
+}
+
+/* Book card inner needs 3D for cover folding */
+.book-card .card-inner {
+  transform-style: preserve-3d;
+  perspective: 1500px;
+}
+
+/* The spread (inside pages) - always present, covered when closed */
+.book-spread {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.book-page {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Book covers */
+.book-cover {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Front cover - covers the spread initially, folds to the left */
+.book-cover-front {
+  z-index: 3;
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  transition: transform 0.8s ease-in-out, z-index 0s 0.4s;
+}
+
+.book-card.book-open .book-cover-front,
+.book-card.book-closed-back .book-cover-front {
+  transform: rotateY(-180deg);
+  z-index: 1;
+}
+
+/* Back cover - starts folded away, folds in to show back */
+.book-cover-back {
+  z-index: 2;
+  transform-origin: right center;
+  transform: rotateY(180deg);
+  transition: transform 0.8s ease-in-out, z-index 0s 0.4s;
+}
+
+.book-card.book-closed-back .book-cover-back {
+  transform: rotateY(0deg);
+  z-index: 4;
+}
+
+/* Spread visibility */
+.book-spread {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.book-card.book-open .book-spread {
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out 0.2s;
+}
+
 /* ---- EMERGED STATE (Card visible) ---- */
 .stacking-card.emerged {
   opacity: 1;
@@ -144,10 +239,6 @@
   transform: translate(-50%, -50%) translateY(5px) scale(0.94) rotate(1.2deg);
 }
 
-.stacking-card.emerged[data-card-index="4"] {
-  transform: translate(-50%, -50%) translateY(10px) scale(0.92) rotate(-0.8deg);
-}
-
 /* ---- FLIPPED STATE ---- */
 .stacking-card.flipped .card-inner {
   transform: rotateY(180deg);
@@ -158,27 +249,22 @@
 
 /* Card 1: CENTER TOP (above envelope) - main card */
 .stacking-card.emerged.positioned[data-card-index="0"] {
-  transform: translate(-50%, calc(-50% - 30vh)) scale(0.9) rotate(0deg) !important;
+  transform: translate(-50%, calc(-50% - 30vh)) scale(0.95) rotate(0deg) !important;
 }
 
 /* Card 2: TOP LEFT */
 .stacking-card.emerged.positioned[data-card-index="1"] {
-  transform: translate(calc(-50% - 20vw), calc(-50% - 25vh)) scale(0.8) rotate(2deg) !important;
+  transform: translate(calc(-50% - 20vw), calc(-50% - 25vh)) scale(0.84) rotate(2deg) !important;
 }
 
 /* Card 3: LEFT */
 .stacking-card.emerged.positioned[data-card-index="2"] {
-  transform: translate(calc(-50% - 35vw), -50%) scale(0.85) rotate(-3deg) !important;
+  transform: translate(calc(-50% - 35vw), -50%) scale(0.89) rotate(-3deg) !important;
 }
 
-/* Card 4: TOP RIGHT */
+/* Card 4 (RSVP): RIGHT */
 .stacking-card.emerged.positioned[data-card-index="3"] {
-  transform: translate(calc(-50% + 20vw), calc(-50% - 25vh)) scale(0.8) rotate(-2deg) !important;
-}
-
-/* Card 5 (RSVP): RIGHT */
-.stacking-card.emerged.positioned[data-card-index="4"] {
-  transform: translate(calc(-50% + 35vw), -50%) scale(0.85) rotate(3deg) !important;
+  transform: translate(calc(-50% + 35vw), -50%) scale(0.89) rotate(3deg) !important;
 }
 
 /* ============================================
@@ -431,7 +517,7 @@
 
 @media (max-width: 768px) {
   .stacking-card {
-    width: min(340px, 90vw);
+    width: min(360px, 90vw);
   }
 
   .card-front-abertura .couple-names {

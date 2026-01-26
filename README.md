@@ -58,31 +58,3 @@ wedding-site-v2/
 │   └── images/             # Your images go here
 └── README.md
 ```
-
-## Browser Support
-
-- Chrome, Firefox, Safari, Edge (modern versions)
-- iOS Safari, Chrome Mobile
-- Requires JavaScript enabled
-
-## Deployment
-
-### GitHub Pages
-
-1. Push this repo to GitHub
-2. Go to Settings → Pages
-3. Select "Deploy from a branch" → `main` → `/ (root)`
-4. Your site will be live at `https://username.github.io/repo-name`
-
-### Netlify
-
-1. Drag and drop the folder to [Netlify Drop](https://app.netlify.com/drop)
-2. Or connect your GitHub repo for auto-deploy
-
-### Custom Domain
-
-Add a `CNAME` file with your domain name, then configure DNS with your registrar.
-
-## License
-
-Feel free to use and modify for your wedding!

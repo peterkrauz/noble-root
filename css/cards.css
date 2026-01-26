@@ -6,11 +6,10 @@
 /* ---- STACKING CARDS CONTAINER ---- */
 .stacking-cards-container {
   position: fixed;
-  top: 8%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(320px, 85vw);
-  height: min(420px, 60vh);
+  /* No fixed dimensions - cards define their own size */
   perspective: 1500px;
   pointer-events: none;
   z-index: var(--z-cards);
@@ -19,14 +18,15 @@
 /* ---- BASE STACKING CARD ---- */
 .stacking-card {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  /* Center cards in container */
+  top: 50%;
+  left: 50%;
+  /* Explicit width for aspect-ratio to work */
+  width: min(320px, 85vw);
   transform-style: preserve-3d;
   /* Initial state: hidden below (at envelope position), scaled down */
   opacity: 0;
-  transform: translateY(350px) scale(0.7);
+  transform: translate(-50%, -50%) translateY(350px) scale(0.7);
   pointer-events: none;
   /* Smooth emergence animation with slight bounce */
   transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -50,6 +50,29 @@
   z-index: 4;
 }
 
+.stacking-card[data-card-index="4"] {
+  z-index: 5;
+}
+
+/* ---- CARD ASPECT RATIOS (based on PNG dimensions) ---- */
+/* Cards 1 & 2: Portrait (1748 x 2481) */
+.stacking-card[data-card-index="0"],
+.stacking-card[data-card-index="1"] {
+  aspect-ratio: 1748 / 2481;
+}
+
+/* Cards 3 & 4: Landscape (1748 x 1306) */
+.stacking-card[data-card-index="2"],
+.stacking-card[data-card-index="3"] {
+  aspect-ratio: 1748 / 1306;
+  width: min(420px, 90vw);
+}
+
+/* Card 5 (RSVP): Keep current portrait dimensions */
+.stacking-card[data-card-index="4"] {
+  aspect-ratio: 320 / 420;
+}
+
 /* ---- CARD INNER (Flip Container) ---- */
 .card-inner {
   position: relative;
@@ -62,6 +85,7 @@
 /* ---- CARD FACES ---- */
 .card-face {
   position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
@@ -77,6 +101,21 @@
   overflow: hidden;
 }
 
+/* ---- IMAGE CARD STYLING ---- */
+.card-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+/* Image cards: remove box-shadow from face, let image define appearance */
+.card-face:has(img) {
+  padding: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
 /* Back face is rotated 180deg */
 .card-back {
   transform: rotateY(180deg);
@@ -90,19 +129,23 @@
 
 /* Stacking offset - each emerged card slightly offset with rotation for natural paper look */
 .stacking-card.emerged[data-card-index="0"] {
-  transform: translateY(-10px) scale(1) rotate(-1.5deg);
+  transform: translate(-50%, -50%) translateY(-10px) scale(1) rotate(-1.5deg);
 }
 
 .stacking-card.emerged[data-card-index="1"] {
-  transform: translateY(-5px) scale(0.98) rotate(1deg);
+  transform: translate(-50%, -50%) translateY(-5px) scale(0.98) rotate(1deg);
 }
 
 .stacking-card.emerged[data-card-index="2"] {
-  transform: translateY(0px) scale(0.96) rotate(-0.5deg);
+  transform: translate(-50%, -50%) translateY(0px) scale(0.96) rotate(-0.5deg);
 }
 
 .stacking-card.emerged[data-card-index="3"] {
-  transform: translateY(5px) scale(0.94) rotate(1.2deg);
+  transform: translate(-50%, -50%) translateY(5px) scale(0.94) rotate(1.2deg);
+}
+
+.stacking-card.emerged[data-card-index="4"] {
+  transform: translate(-50%, -50%) translateY(10px) scale(0.92) rotate(-0.8deg);
 }
 
 /* ---- FLIPPED STATE ---- */
@@ -110,22 +153,26 @@
   transform: rotateY(180deg);
 }
 
-/* ---- POSITIONED STATE (Cards sit just outside envelope) ---- */
-/* Layout: grid around envelope - two upper, two lower */
+/* ---- POSITIONED STATE (Cards stacked/fanned in center) ---- */
+/* Layout: centered fan with rotation and scale variation */
 .stacking-card.emerged.positioned[data-card-index="0"] {
-  transform: translate(calc(-50% - 8vw), calc(-50% + 2vh)) scale(0.65) rotate(-2deg) !important;    /* LEFT - upper */
+  transform: translate(-50%, -50%) scale(0.85) rotate(-8deg) !important;
 }
 
 .stacking-card.emerged.positioned[data-card-index="1"] {
-  transform: translate(calc(-50% + 25vw), calc(-50% + 2vh)) scale(0.65) rotate(2deg) !important;    /* RIGHT - upper */
+  transform: translate(-50%, -50%) scale(0.88) rotate(-4deg) !important;
 }
 
 .stacking-card.emerged.positioned[data-card-index="2"] {
-  transform: translate(calc(-50% - 8vw), calc(-50% + 32vh)) scale(0.65) rotate(-1.5deg) !important; /* LEFT - lower */
+  transform: translate(-50%, -50%) scale(0.91) rotate(0deg) !important;
 }
 
 .stacking-card.emerged.positioned[data-card-index="3"] {
-  transform: translate(calc(-50% + 25vw), calc(-50% + 32vh)) scale(0.65) rotate(1.5deg) !important; /* RIGHT - lower (RSVP) */
+  transform: translate(-50%, -50%) scale(0.94) rotate(4deg) !important;
+}
+
+.stacking-card.emerged.positioned[data-card-index="4"] {
+  transform: translate(-50%, -50%) scale(0.97) rotate(8deg) !important;
 }
 
 /* ============================================
@@ -377,9 +424,8 @@
    ============================================ */
 
 @media (max-width: 768px) {
-  .stacking-cards-container {
+  .stacking-card {
     width: min(300px, 90vw);
-    height: min(400px, 55vh);
   }
 
   .card-front-abertura .couple-names {
@@ -396,9 +442,8 @@
 }
 
 @media (max-width: 480px) {
-  .stacking-cards-container {
+  .stacking-card {
     width: 90vw;
-    height: 50vh;
   }
 
   .card-face {

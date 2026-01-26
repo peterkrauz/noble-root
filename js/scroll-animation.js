@@ -28,13 +28,14 @@
     envelopeFinalY: 25,          // Final Y position (vh from center, 25 = 10% higher than before)
 
     // Stacking cards - emergence, flip, and position thresholds
-    // Cards emerge, flip to show back, then move to their corner position
-    // All animations complete by 73%, leaving 27% buffer before details section
+    // Cards emerge, flip to show back, then move to their stacked position
+    // All animations complete by 70%, leaving 30% buffer before details section
     stackingCards: {
-      abertura: { emerge: 0.12, flip: 0.20, position: 0.25 },
-      local:    { emerge: 0.28, flip: 0.36, position: 0.41 },
-      info:     { emerge: 0.44, flip: 0.52, position: 0.57 },
-      rsvp:     { emerge: 0.60, flip: 0.68, position: 0.73 },
+      card1: { emerge: 0.12, flip: 0.18, position: 0.22 },
+      card2: { emerge: 0.24, flip: 0.30, position: 0.34 },
+      card3: { emerge: 0.36, flip: 0.42, position: 0.46 },
+      card4: { emerge: 0.48, flip: 0.54, position: 0.58 },
+      rsvp:  { emerge: 0.60, flip: 0.66, position: 0.70 },
     },
 
     // Envelope shadow removal threshold
@@ -61,10 +62,11 @@
     floralRight: document.getElementById('floralRight'),
     // Stacking cards
     stackingCardsContainer: document.getElementById('stackingCards'),
-    cardAbertura: document.getElementById('cardAbertura'),
-    cardLocal: document.getElementById('cardLocal'),
-    cardInfo: document.getElementById('cardInfo'),
-    cardRsvpNew: document.getElementById('cardRsvpNew'),
+    card1: document.getElementById('card1'),
+    card2: document.getElementById('card2'),
+    card3: document.getElementById('card3'),
+    card4: document.getElementById('card4'),
+    cardRsvp: document.getElementById('cardRsvp'),
     siteFooter: document.getElementById('siteFooter'),
   };
 
@@ -279,10 +281,11 @@
    * Animate all stacking cards
    */
   function animateStackingCards(progress) {
-    animateStackingCard(elements.cardAbertura, progress, CONFIG.stackingCards.abertura);
-    animateStackingCard(elements.cardLocal, progress, CONFIG.stackingCards.local);
-    animateStackingCard(elements.cardInfo, progress, CONFIG.stackingCards.info);
-    animateStackingCard(elements.cardRsvpNew, progress, CONFIG.stackingCards.rsvp);
+    animateStackingCard(elements.card1, progress, CONFIG.stackingCards.card1);
+    animateStackingCard(elements.card2, progress, CONFIG.stackingCards.card2);
+    animateStackingCard(elements.card3, progress, CONFIG.stackingCards.card3);
+    animateStackingCard(elements.card4, progress, CONFIG.stackingCards.card4);
+    animateStackingCard(elements.cardRsvp, progress, CONFIG.stackingCards.rsvp);
   }
 
   // ============================================
@@ -333,17 +336,19 @@
     // Log config for debugging
     console.log('=== WEDDING SCROLL ANIMATION DEBUG ===');
     console.log('Card thresholds (emerge / flip / position):');
-    console.log(`  Abertura: ${CONFIG.stackingCards.abertura.emerge} / ${CONFIG.stackingCards.abertura.flip} / ${CONFIG.stackingCards.abertura.position}`);
-    console.log(`  Local:    ${CONFIG.stackingCards.local.emerge} / ${CONFIG.stackingCards.local.flip} / ${CONFIG.stackingCards.local.position}`);
-    console.log(`  Info:     ${CONFIG.stackingCards.info.emerge} / ${CONFIG.stackingCards.info.flip} / ${CONFIG.stackingCards.info.position}`);
-    console.log(`  RSVP:     ${CONFIG.stackingCards.rsvp.emerge} / ${CONFIG.stackingCards.rsvp.flip} / ${CONFIG.stackingCards.rsvp.position}`);
+    console.log(`  Card 1: ${CONFIG.stackingCards.card1.emerge} / ${CONFIG.stackingCards.card1.flip} / ${CONFIG.stackingCards.card1.position}`);
+    console.log(`  Card 2: ${CONFIG.stackingCards.card2.emerge} / ${CONFIG.stackingCards.card2.flip} / ${CONFIG.stackingCards.card2.position}`);
+    console.log(`  Card 3: ${CONFIG.stackingCards.card3.emerge} / ${CONFIG.stackingCards.card3.flip} / ${CONFIG.stackingCards.card3.position}`);
+    console.log(`  Card 4: ${CONFIG.stackingCards.card4.emerge} / ${CONFIG.stackingCards.card4.flip} / ${CONFIG.stackingCards.card4.position}`);
+    console.log(`  RSVP:   ${CONFIG.stackingCards.rsvp.emerge} / ${CONFIG.stackingCards.rsvp.flip} / ${CONFIG.stackingCards.rsvp.position}`);
 
     // Log card elements found
     console.log('Card elements found:');
-    console.log(`  cardAbertura: ${elements.cardAbertura ? 'YES' : 'NO'}`);
-    console.log(`  cardLocal: ${elements.cardLocal ? 'YES' : 'NO'}`);
-    console.log(`  cardInfo: ${elements.cardInfo ? 'YES' : 'NO'}`);
-    console.log(`  cardRsvpNew: ${elements.cardRsvpNew ? 'YES' : 'NO'}`);
+    console.log(`  card1: ${elements.card1 ? 'YES' : 'NO'}`);
+    console.log(`  card2: ${elements.card2 ? 'YES' : 'NO'}`);
+    console.log(`  card3: ${elements.card3 ? 'YES' : 'NO'}`);
+    console.log(`  card4: ${elements.card4 ? 'YES' : 'NO'}`);
+    console.log(`  cardRsvp: ${elements.cardRsvp ? 'YES' : 'NO'}`);
     console.log('=======================================');
 
     // Set initial states

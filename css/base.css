@@ -128,8 +128,8 @@ img {
 /* ---- PAGE STRUCTURE ---- */
 .scroll-container {
     /* Extra height to allow for scroll-driven animations */
-    /* Increased to give more dwell time on RSVP before scrolling to details */
-    min-height: 1150vh;
+    /* Increased to give more dwell time on cards before scrolling to details */
+    min-height: 1500vh;
     position: relative;
 }
 
@@ -553,7 +553,7 @@ img {
     }
 
     .scroll-container {
-        min-height: 900vh;
+        min-height: 1200vh;
     }
 
     .intro-text {
@@ -623,7 +623,7 @@ img {
 
 @media (max-width: 480px) {
     .scroll-container {
-        min-height: 1000vh;
+        min-height: 1300vh;
     }
 
     .floral-decoration {

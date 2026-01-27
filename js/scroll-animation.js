@@ -32,10 +32,10 @@
     // Book card has special states: emerge, open, closeBack, position
     // All animations complete by 70%, leaving 30% buffer before details section
     stackingCards: {
-      card1: { emerge: 0.12, flip: 0.18, position: 0.22 },
-      card2: { emerge: 0.24, flip: 0.30, position: 0.34 },
-      book:  { emerge: 0.36, open: 0.42, closeBack: 0.52, position: 0.58 },
-      rsvp:  { emerge: 0.60, flip: 0.66, position: 0.70 },
+      card1: { emerge: 0.06, flip: 0.12, position: 0.16 },
+      card2: { emerge: 0.22, flip: 0.28, position: 0.32 },
+      book:  { emerge: 0.40, open: 0.48, closeBack: 0.56, position: 0.62 },
+      rsvp:  { emerge: 0.70, flip: 0.76, position: 0.80 },
     },
 
     // Envelope shadow removal threshold

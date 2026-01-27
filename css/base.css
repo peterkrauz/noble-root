@@ -198,6 +198,21 @@ img {
     color: var(--color-text-light);
 }
 
+/* ---- TRANSITION BANNER ---- */
+.transition-banner {
+    background: #4f1414;
+    padding: 3rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-decoration {
+    max-width: 200px;
+    height: auto;
+    opacity: 0.9;
+}
+
 /* ---- FOOTER ---- */
 .site-footer {
     background: var(--color-burgundy-dark);

@@ -8,8 +8,8 @@
   perspective: 1500px;
   perspective-origin: 50% 50%;
   position: relative;
-  width: min(480px, 90vw);
-  height: min(340px, 65vw);
+  width: min(432px, 81vw);
+  height: min(306px, 59vw);
   transition: transform 0.1s linear;
 }
 

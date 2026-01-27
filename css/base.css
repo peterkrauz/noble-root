@@ -129,7 +129,7 @@ img {
 .scroll-container {
     /* Extra height to allow for scroll-driven animations */
     /* Increased to give more dwell time on cards before scrolling to details */
-    min-height: 1500vh;
+    min-height: 1650vh;
     position: relative;
 }
 

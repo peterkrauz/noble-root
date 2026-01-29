@@ -417,4 +417,9 @@
     init();
   }
 
+  // Hide loading overlay once all images are loaded
+  window.addEventListener('load', () => {
+    document.getElementById('loadingOverlay')?.classList.add('loaded');
+  });
+
 })();

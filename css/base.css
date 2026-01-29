@@ -27,6 +27,35 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* ---- LOADING OVERLAY ---- */
+.loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--color-burgundy-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-overlay.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading-initials {
+    font-family: var(--font-script);
+    font-size: 4rem;
+    color: var(--color-gold);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
 /* ---- TYPOGRAPHY ---- */
 h1,
 h2,
@@ -305,7 +334,7 @@ img {
 
 .detail-item h3 {
     font-family: var(--font-sans);
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--color-coral);

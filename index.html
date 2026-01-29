@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="css/variables.css?v=14">
   <link rel="stylesheet" href="css/base.css?v=17">
   <link rel="stylesheet" href="css/envelope.css?v=22">
-  <link rel="stylesheet" href="css/cards.css?v=51">
+  <link rel="stylesheet" href="css/cards.css?v=53">
 
   <!-- Preload card images for smooth animations -->
   <link rel="preload" href="elements/cards/card_1_frente.png" as="image">
@@ -28,6 +28,8 @@
   <link rel="preload" href="elements/cards/card_3_verso.png" as="image">
   <link rel="preload" href="elements/cards/card_4_frente.png" as="image">
   <link rel="preload" href="elements/cards/card_4_verso.png" as="image">
+  <link rel="preload" href="elements/rsvp_frente.png" as="image">
+  <link rel="preload" href="elements/rsvp_verso.png" as="image">
 
   <!-- Favicon -->
   <link rel="icon"
@@ -151,15 +153,12 @@
           <!-- Card 4: RSVP -->
           <div class="stacking-card" id="cardRsvp" data-card-index="3">
             <div class="card-inner">
-              <div class="card-face card-front card-front-rsvp">
-                <div class="rsvp-seal"><span>C&P</span></div>
-                <p class="card-title">Confirme sua Presença</p>
-                <a href="https://forms.google.com/your-form-link" target="_blank" rel="noopener"
-                  class="rsvp-button">Responder</a>
+              <div class="card-face card-front">
+                <img src="elements/rsvp_frente.png" alt="RSVP Front">
+                <a href="https://forms.google.com/your-form-link" target="_blank" rel="noopener" class="rsvp-overlay"></a>
               </div>
-              <div class="card-face card-back card-back-rsvp">
-                <p class="back-title">Prazo</p>
-                <p class="back-deadline">Até 30 de Abril</p>
+              <div class="card-face card-back">
+                <img src="elements/rsvp_verso.png" alt="RSVP Back">
               </div>
             </div>
           </div>

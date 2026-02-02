@@ -206,6 +206,12 @@
     1px 1px 1px rgba(0, 0, 0, 0.4),
     -0.5px -0.5px 0px rgba(255, 200, 200, 0.1);
   letter-spacing: 0.02em;
+}
+
+.wax-seal-monogram {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
   /* Efeito de relevo/embossed */
   position: relative;
   z-index: 1;

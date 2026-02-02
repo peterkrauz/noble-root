@@ -51,6 +51,12 @@ body {
     animation: pulse 1.5s ease-in-out infinite;
 }
 
+.loading-monogram {
+    width: 120px;
+    height: auto;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
 @keyframes pulse {
     0%, 100% { opacity: 0.5; transform: scale(1); }
     50% { opacity: 1; transform: scale(1.05); }

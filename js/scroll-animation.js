@@ -417,11 +417,11 @@
     init();
   }
 
-  // Hide loading overlay once all images are loaded + 1 second
+  // Hide loading overlay once all images are loaded + 1.5 seconds
   window.addEventListener('load', () => {
     setTimeout(() => {
       document.getElementById('loadingOverlay')?.classList.add('loaded');
-    }, 1000);
+    }, 1500);
   });
 
 })();

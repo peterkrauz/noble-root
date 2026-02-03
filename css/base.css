@@ -233,6 +233,21 @@ img {
     color: var(--color-text-light);
 }
 
+/* ---- PIX KEY COPY FEEDBACK ---- */
+.pix-key:hover {
+    transform: scale(1.02);
+}
+
+.pix-key[data-copied="true"] {
+    background: #dcc570 !important;
+    color: #4f1414 !important;
+}
+
+.pix-key[data-copied="true"]::after {
+    content: " - Copiado!";
+    font-size: 0.8rem;
+}
+
 /* ---- TRANSITION BANNER ---- */
 .transition-banner {
     background: #4f1414;

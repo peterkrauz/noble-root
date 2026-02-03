@@ -15,7 +15,7 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/variables.css?v=14">
-  <link rel="stylesheet" href="css/base.css?v=20">
+  <link rel="stylesheet" href="css/base.css?v=21">
   <link rel="stylesheet" href="css/envelope.css?v=23">
   <link rel="stylesheet" href="css/cards.css?v=53">
 
@@ -162,8 +162,7 @@
             <div class="card-inner">
               <div class="card-face card-front">
                 <img src="elements/rsvp_frente.png" alt="RSVP Front">
-                <a href="https://forms.google.com/your-form-link" target="_blank" rel="noopener"
-                  class="rsvp-overlay"></a>
+                <a href="https://forms.gle/5o1xbGy2hs391vAX8" target="_blank" rel="noopener" class="rsvp-overlay"></a>
               </div>
               <div class="card-face card-back">
                 <img src="elements/rsvp_verso.png" alt="RSVP Back">
@@ -260,13 +259,13 @@
       </div>
 
       <div class="inspo-links" style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;">
-        <a href="https://pinterest.com/search/pins/?q=wedding%20guest%20outfit%20women" target="_blank" rel="noopener"
+        <a href="https://br.pinterest.com/a_bitofeverything/o-que-usar-mulheres/" target="_blank" rel="noopener"
           class="inspo-link"
           style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:rgba(255,255,255,0.08);border:1px solid #dcc570;border-radius:25px;color:#f7f5d1;font-family:'Lexend Giga',sans-serif;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;">
           <span class="inspo-icon">📌</span>
           <span>Inspirações Femininas</span>
         </a>
-        <a href="https://pinterest.com/search/pins/?q=wedding%20guest%20outfit%20men" target="_blank" rel="noopener"
+        <a href="https://br.pinterest.com/a_bitofeverything/o-que-usar-homens/" target="_blank" rel="noopener"
           class="inspo-link"
           style="display:flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;background:rgba(255,255,255,0.08);border:1px solid #dcc570;border-radius:25px;color:#f7f5d1;font-family:'Lexend Giga',sans-serif;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;">
           <span class="inspo-icon">📌</span>
@@ -293,9 +292,13 @@
         <h3
           style="font-family:'Lexend Giga',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#fc4c29;margin-bottom:1rem;">
           Chave Pix</h3>
-        <p class="pix-key"
-          style="font-family:'Lexend Giga',sans-serif;font-size:1rem;font-weight:500;color:#821d1d;background:#fffef8;padding:0.6rem 1.2rem;border-radius:6px;display:inline-block;margin-bottom:0.4rem;">
+        <p class="pix-key" id="pixKey"
+          style="font-family:'Lexend Giga',sans-serif;font-size:1rem;font-weight:500;color:#821d1d;background:#fffef8;padding:0.6rem 1.2rem;border-radius:6px;display:inline-block;margin-bottom:0.4rem;cursor:pointer;transition:transform 0.2s ease;"
+          onclick="navigator.clipboard.writeText('10de6b9d-4164-492e-ad6d-b9ddcef73a98').then(() => { this.dataset.copied = 'true'; setTimeout(() => this.dataset.copied = '', 1500); })">
           10de6b9d-4164-492e-ad6d-b9ddcef73a98</p>
+        <p class="pix-hint"
+          style="font-family:'Playfair Display',serif;font-size:0.75rem;color:#827546;opacity:0.8;margin-bottom:0.4rem;">
+          Clique para copiar</p>
         <p class="pix-name" style="font-family:'Reenie Beanie',cursive;font-size:1.4rem;color:#4f1414;">Carol & Peter
         </p>
       </div>
@@ -310,10 +313,13 @@
         </div>
         <div class="gift-item"
           style="flex:1;min-width:220px;max-width:280px;padding:2rem;background:#fffef8;border-radius:12px;box-shadow:0 4px 20px rgba(79,20,20,0.1);">
-          <h4 style="font-family:'Reenie Beanie',cursive;font-size:1.8rem;color:#821d1d;margin-bottom:0.5rem;">Protetor
-            Paulo</h4>
+          <h4 style="font-family:'Reenie Beanie',cursive;font-size:1.8rem;color:#821d1d;margin-bottom:0.5rem;">
+            <a href="https://www.instagram.com/protetorpaulo" target="_blank" rel="noopener"
+              style="color:inherit;text-decoration:none;">Protetor Paulo</a>
+          </h4>
           <p style="font-family:'Playfair Display',serif;font-size:0.95rem;color:#827546;line-height:1.5;">50% do valor
-            será doado ao Protetor Paulo, cuidador animal</p>
+            será doado ao <a href="https://www.instagram.com/protetorpaulo" target="_blank" rel="noopener"
+              style="color:#821d1d;text-decoration:underline;">Protetor Paulo</a>, cuidador animal</p>
         </div>
       </div>
 

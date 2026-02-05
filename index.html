@@ -207,18 +207,16 @@
         <div class="detail-item">
           <h3>Cerimônia</h3>
           <p>15h</p>
-          <p>Cerimônia de Casamento</p>
+          <p>Início da Cerimônia</p>
         </div>
         <div class="detail-item">
           <h3>Local</h3>
           <p>Casa Maciço</p>
-          <p class="address-small">R. Rosa, 1998</p>
-          <p class="address-small">Pantanal, Florianópolis - SC</p>
-          <p class="address-small">88040-270</p>
+          <p class="address-small" id="venueAddress"></p>
         </div>
         <div class="detail-item">
           <h3>Traje</h3>
-          <p>Traje Social</p>
+          <p>Esporte Fino / Casual Chic</p>
         </div>
       </div>
 
@@ -234,7 +232,7 @@
   <section class="colors-section" id="colorsInspo" style="background:#4f1414;padding:4rem 2rem;">
     <div class="colors-content" style="max-width:800px;margin:0 auto;text-align:center;">
       <h2 style="font-family:'Reenie Beanie',cursive;font-size:3rem;color:#dcc570;margin-bottom:0.5rem;">Cores &
-        Inspiração</h2>
+        Inspirações</h2>
       <p class="colors-subtitle"
         style="font-family:'Playfair Display',serif;font-size:0.9rem;color:#f7f5d1;opacity:0.8;margin-bottom:2rem;">
         Nossa paleta de cores e inspirações de looks</p>
@@ -287,22 +285,6 @@
         o dinheiro será usado da seguinte forma:
       </p>
 
-      <div class="pix-box"
-        style="background:linear-gradient(135deg,rgba(220,197,112,0.15) 0%,rgba(130,117,70,0.08) 100%);border:2px solid #dcc570;border-radius:12px;padding:2rem;margin-bottom:4rem;">
-        <h3
-          style="font-family:'Lexend Giga',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#fc4c29;margin-bottom:1rem;">
-          Chave Pix</h3>
-        <p class="pix-key" id="pixKey"
-          style="font-family:'Lexend Giga',sans-serif;font-size:1rem;font-weight:500;color:#821d1d;background:#fffef8;padding:0.6rem 1.2rem;border-radius:6px;display:inline-block;margin-bottom:0.4rem;cursor:pointer;transition:transform 0.2s ease;"
-          onclick="navigator.clipboard.writeText('10de6b9d-4164-492e-ad6d-b9ddcef73a98').then(() => { this.dataset.copied = 'true'; setTimeout(() => this.dataset.copied = '', 1500); })">
-          10de6b9d-4164-492e-ad6d-b9ddcef73a98</p>
-        <p class="pix-hint"
-          style="font-family:'Playfair Display',serif;font-size:0.75rem;color:#827546;opacity:0.8;margin-bottom:0.4rem;">
-          Clique para copiar</p>
-        <p class="pix-name" style="font-family:'Reenie Beanie',cursive;font-size:1.4rem;color:#4f1414;">Carol & Peter
-        </p>
-      </div>
-
       <div class="gifts-split" style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-bottom:4rem;">
         <div class="gift-item"
           style="flex:1;min-width:220px;max-width:280px;padding:2rem;background:#fffef8;border-radius:12px;box-shadow:0 4px 20px rgba(79,20,20,0.1);">
@@ -319,8 +301,24 @@
           </h4>
           <p style="font-family:'Playfair Display',serif;font-size:0.95rem;color:#827546;line-height:1.5;">50% do valor
             será doado ao <a href="https://www.instagram.com/protetorpaulo" target="_blank" rel="noopener"
-              style="color:#821d1d;text-decoration:underline;">Protetor Paulo</a>, cuidador animal</p>
+              style="color:#821d1d;text-decoration:underline;">Protetor Paulo</a>, da causa animal</p>
         </div>
+      </div>
+
+      <div class="pix-box"
+        style="background:linear-gradient(135deg,rgba(220,197,112,0.15) 0%,rgba(130,117,70,0.08) 100%);border:2px solid #dcc570;border-radius:12px;padding:2rem;margin-bottom:4rem;">
+        <h3
+          style="font-family:'Lexend Giga',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#fc4c29;margin-bottom:1rem;">
+          Chave Pix</h3>
+        <p class="pix-key" id="pixKey"
+          style="font-family:'Lexend Giga',sans-serif;font-size:1rem;font-weight:500;color:#821d1d;background:#fffef8;padding:0.6rem 1.2rem;border-radius:6px;display:inline-block;margin-bottom:0.4rem;cursor:pointer;transition:transform 0.2s ease;"
+          onclick="navigator.clipboard.writeText('10de6b9d-4164-492e-ad6d-b9ddcef73a98').then(() => { this.dataset.copied = 'true'; setTimeout(() => this.dataset.copied = '', 1500); })">
+          10de6b9d-4164-492e-ad6d-b9ddcef73a98</p>
+        <p class="pix-hint"
+          style="font-family:'Playfair Display',serif;font-size:0.75rem;color:#827546;opacity:0.8;margin-bottom:0.4rem;">
+          Clique para copiar</p>
+        <p class="pix-name" style="font-family:'Reenie Beanie',cursive;font-size:1.4rem;color:#4f1414;">Carol & Peter
+        </p>
       </div>
 
       <p class="gifts-thanks" style="font-family:'Reenie Beanie',cursive;font-size:1.4rem;color:#827546;">Obrigado por

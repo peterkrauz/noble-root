@@ -14,7 +14,7 @@
   // ============================================
   const CONFIG = {
     // Scroll thresholds (as percentage of scroll height)
-    scrollHintFade: 0.05,        // When scroll hint starts fading
+    scrollHintFade: 0.77,        // When scroll hint starts fading (after 4th card positioned)
     flapStartOpen: 0.08,         // When flap starts opening
     flapFullyOpen: 0.22,         // When flap is fully open
     sealBreak: 0.12,             // When wax seal breaks
@@ -346,11 +346,32 @@
   // INITIALIZATION
   // ============================================
 
+  /**
+   * Scroll to a specific progress point (0 to 1)
+   */
+  function scrollToProgress(targetProgress) {
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const targetScroll = scrollHeight * targetProgress;
+    window.scrollTo({
+      top: targetScroll,
+      behavior: 'smooth'
+    });
+  }
+
   function init() {
     // Inject venue address via JS to hide from HTML source/scrapers
     const venueAddress = document.getElementById('venueAddress');
     if (venueAddress) {
       venueAddress.innerHTML = 'R. Rosa, 1998<br>Pantanal, Florianópolis - SC<br>88040-270';
+    }
+
+    // Make wax seal clickable - scrolls to first card emergence
+    if (elements.waxSeal) {
+      elements.waxSeal.style.cursor = 'pointer';
+      elements.waxSeal.addEventListener('click', () => {
+        // Scroll to just after the first card flips (around 12%)
+        scrollToProgress(0.12);
+      });
     }
 
     // Set initial states

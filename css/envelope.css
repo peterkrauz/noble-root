@@ -217,6 +217,11 @@
   z-index: 1;
 }
 
+/* Hover effect - shows it's clickable */
+.wax-seal:hover {
+  transform: translateX(-50%) scale(1.08);
+}
+
 /* Selo quebra quando envelope abre */
 .wax-seal.broken {
   transform: translateX(-50%) scale(0.85) rotate(-8deg);

@@ -14,7 +14,7 @@
   // ============================================
   const CONFIG = {
     // Scroll thresholds (as percentage of scroll height)
-    scrollHintFade: 0.77,        // When scroll hint starts fading (after 4th card positioned)
+    scrollHintFade: 0.73,        // When scroll hint starts fading (after 4th card positioned)
     flapStartOpen: 0.08,         // When flap starts opening
     flapFullyOpen: 0.22,         // When flap is fully open
     sealBreak: 0.12,             // When wax seal breaks
@@ -35,7 +35,7 @@
       card1: { emerge: 0.05, flip: 0.11, position: 0.17 },
       card2: { emerge: 0.22, flip: 0.28, position: 0.34 },
       book:  { emerge: 0.39, open: 0.46, closeBack: 0.53, position: 0.60 },
-      rsvp:  { emerge: 0.65, flip: 0.71, position: 0.77 },
+      rsvp:  { emerge: 0.62, flip: 0.68, position: 0.73 },
     },
 
     // Envelope shadow removal threshold
@@ -369,8 +369,8 @@
     if (elements.waxSeal) {
       elements.waxSeal.style.cursor = 'pointer';
       elements.waxSeal.addEventListener('click', () => {
-        // Scroll to just after the first card flips (around 12%)
-        scrollToProgress(0.12);
+        // Scroll to when the first card emerges (before flip)
+        scrollToProgress(0.06);
       });
     }
 
